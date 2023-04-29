@@ -5,11 +5,17 @@ import ca.uhn.fhir.jpa.batch2.JpaBatch2Config;
 import ca.uhn.fhir.jpa.starter.annotations.OnEitherVersion;
 import ca.uhn.fhir.jpa.starter.common.FhirTesterConfig;
 import ca.uhn.fhir.jpa.starter.mdm.MdmConfig;
+import ca.uhn.fhir.jpa.starter.resourceProvider.MemberMatchProvider;
 import ca.uhn.fhir.jpa.subscription.channel.config.SubscriptionChannelConfig;
 import ca.uhn.fhir.jpa.subscription.match.config.SubscriptionProcessorConfig;
 import ca.uhn.fhir.jpa.subscription.match.config.WebsocketDispatcherConfig;
 import ca.uhn.fhir.jpa.subscription.submit.config.SubscriptionSubmitterConfig;
+import ca.uhn.fhir.rest.server.IResourceProvider;
 import ca.uhn.fhir.rest.server.RestfulServer;
+
+import java.util.List;
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.boot.SpringApplication;
@@ -60,6 +66,13 @@ public class Application extends SpringBootServletInitializer {
   @Conditional(OnEitherVersion.class)
   public ServletRegistrationBean hapiServletRegistration(RestfulServer restfulServer) {
     ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean();
+    // Added by Rick Geimer to wire custom operations
+    List<IResourceProvider> resourceProviders = new ArrayList<IResourceProvider>();
+    List<IResourceProvider> old = restfulServer.getResourceProviders();
+    resourceProviders.addAll(old);
+    resourceProviders.add(new MemberMatchProvider());
+    restfulServer.setResourceProviders(resourceProviders);
+    // End Rick stuff
     beanFactory.autowireBean(restfulServer);
     servletRegistrationBean.setServlet(restfulServer);
     servletRegistrationBean.addUrlMappings("/fhir/*");
