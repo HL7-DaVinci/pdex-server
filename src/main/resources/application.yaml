@@ -71,12 +71,12 @@ hapi:
     ### enable to set the Server URL
     server_address: http://localhost:8080/fhir
     #    defer_indexing_for_codesystems_of_size: 101
-    install_transitive_ig_dependencies: true
+    install_transitive_ig_dependencies: false
     implementationguides:
-      ndh:
-        url: https://build.fhir.org/ig/HL7/fhir-us-ndh/package.tgz
-        name: hl7.fhir.us.ndh
-        version: 0.1.0
+    #  ndh:
+    #    url: https://build.fhir.org/ig/HL7/fhir-us-ndh/package.tgz
+    #    name: hl7.fhir.us.ndh
+    #    version: 0.1.0
 #      vsac:
 #        url: http://fhir.org/packages/us.nlm.vsac/0.9.0/package.tgz
 #        name: us.nlm.vsac
