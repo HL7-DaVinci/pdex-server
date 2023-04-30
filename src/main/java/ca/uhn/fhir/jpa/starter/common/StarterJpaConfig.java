@@ -84,6 +84,9 @@ import java.util.*;
 
 import static ca.uhn.fhir.jpa.starter.common.validation.IRepositoryValidationInterceptorFactory.ENABLE_REPOSITORY_VALIDATING_INTERCEPTOR;
 
+// Added by Corey Spears to register custom member-match operation
+import ca.uhn.fhir.jpa.starter.resourceProvider.MemberMatchProvider;
+
 @Configuration
 //allow users to configure custom packages to scan for additional beans
 @ComponentScan(basePackages = { "${hapi.fhir.custom-bean-packages:}" })
@@ -318,6 +321,9 @@ public class StarterJpaConfig {
 		} else {
 			fhirServer.setServerAddressStrategy(new IncomingRequestAddressStrategy());
 		}
+
+		// Added by Corey Spears to register custom member-match operation
+		fhirServer.registerProvider(new MemberMatchProvider(fhirServer.getFhirContext(), daoRegistry));
 
 		/*
 		 * If you are using DSTU3+, you may want to add a terminology uploader, which allows

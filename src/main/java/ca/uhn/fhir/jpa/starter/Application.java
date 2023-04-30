@@ -66,6 +66,7 @@ public class Application extends SpringBootServletInitializer {
   @Conditional(OnEitherVersion.class)
   public ServletRegistrationBean hapiServletRegistration(RestfulServer restfulServer) {
     ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean();
+    /* Removed by Corey Spears, Added registerProvider to StarterJpaConfig instead
     // Added by Rick Geimer to wire custom operations
     List<IResourceProvider> resourceProviders = new ArrayList<IResourceProvider>();
     List<IResourceProvider> old = restfulServer.getResourceProviders();
@@ -73,6 +74,7 @@ public class Application extends SpringBootServletInitializer {
     resourceProviders.add(new MemberMatchProvider());
     restfulServer.setResourceProviders(resourceProviders);
     // End Rick stuff
+     */
     beanFactory.autowireBean(restfulServer);
     servletRegistrationBean.setServlet(restfulServer);
     servletRegistrationBean.addUrlMappings("/fhir/*");
