@@ -73,8 +73,8 @@ hapi:
     ### enable to set the Server URL
     server_address: http://localhost:8080/fhir
     #    defer_indexing_for_codesystems_of_size: 101
-    install_transitive_ig_dependencies: false
-    implementationguides:
+    # install_transitive_ig_dependencies: false
+    # implementationguides:
     #  ndh:
     #    url: https://build.fhir.org/ig/HL7/fhir-us-ndh/package.tgz
     #    name: hl7.fhir.us.ndh
@@ -83,17 +83,17 @@ hapi:
 #        url: http://fhir.org/packages/us.nlm.vsac/0.9.0/package.tgz
 #        name: us.nlm.vsac
 #        version: 0.9.0
-      pdex:
-        url: http://build.fhir.org/ig/HL7/davinci-epdx/package.tgz
-        name: hl7.fhir.us.davinci-pdex
-        version: 2.0.0-ballot
+    #  pdex:
+    #    url: http://build.fhir.org/ig/HL7/davinci-epdx/package.tgz
+    #    name: hl7.fhir.us.davinci-pdex
+    #    version: 2.0.0-ballot
     #    supported_resource_types:
     #      - Patient
     #      - Observation
     ##################################################
     # Allowed Bundle Types for persistence (defaults are: COLLECTION,DOCUMENT,MESSAGE)
     ##################################################
-    #    allowed_bundle_types: COLLECTION,DOCUMENT,MESSAGE,TRANSACTION,TRANSACTIONRESPONSE,BATCH,BATCHRESPONSE,HISTORY,SEARCHSET
+    allowed_bundle_types: COLLECTION,DOCUMENT,MESSAGE,TRANSACTION,TRANSACTIONRESPONSE,BATCH,BATCHRESPONSE,HISTORY,SEARCHSET
     #    allow_cascading_deletes: true
     #    allow_contains_searches: true
     #    allow_external_references: true
@@ -122,6 +122,7 @@ hapi:
     #    etag_support_enabled: true
     #    expunge_enabled: true
     #    client_id_strategy: ALPHANUMERIC
+    client_id_strategy: ANY
     #    fhirpath_interceptor_enabled: false
     #    filter_search_enabled: true
     #    graphql_enabled: true
