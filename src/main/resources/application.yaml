@@ -173,7 +173,7 @@ hapi:
     tester:
       home:
         name: Local Tester
-        server_address: 'https://pdex-server.lantanagroup.com/fhir'
+        server_address: 'https://pdex-server.davinci.hl7.org/fhir'
         refuse_to_fetch_third_party_urls: false
         fhir_version: R4
       global:
