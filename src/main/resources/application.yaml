@@ -12,7 +12,7 @@ spring:
   flyway:
     enabled: false
     fail-on-missing-locations: false
-#    check-location: false
+    check-location: false
     baselineOnMigrate: true
   datasource:
     url: 'jdbc:h2:file:./target/database/h2'
@@ -54,6 +54,14 @@ spring:
 #      hibernate.search.backend.analysis.configurer: ca.uhn.fhir.jpa.search.HapiHSearchAnalysisConfigurers$HapiElasticAnalysisConfigurer
 hapi:
   fhir:
+    ### This flag when enabled to true, will avail evaluate measure operations from CR Module.
+    ### Flag is false by default, can be passed as command line argument to override.
+    cr:
+      enabled: false
+
+    cdshooks:
+      enabled: true
+      clientIdHeaderName: client_id
 
     ### This enables the swagger-ui at /fhir/swagger-ui/index.html as well as the /fhir/api-docs (see https://hapifhir.io/hapi-fhir/docs/server_plain/openapi.html)
     openapi_enabled: true
@@ -61,6 +69,10 @@ hapi:
     fhir_version: R4
     # Corey Spears - Allow external reference for consent policy for Member match operation
     allow_external_references: true
+    ### Flag is false by default. This flag enables runtime installation of IG's.
+    ig_runtime_upload_enabled: false
+    ### This flag when enabled to true, will avail evaluate measure operations from CR Module.
+
     ### enable to use the ApacheProxyAddressStrategy which uses X-Forwarded-* headers
     ### to determine the FHIR server address
     #   use_apache_address_strategy: false
@@ -100,7 +112,8 @@ hapi:
     #    allow_multiple_delete: true
     #    allow_override_default_search_params: true
     #    auto_create_placeholder_reference_targets: false
-    #    cr_enabled: true
+    ### tells the server to automatically append the current version of the target resource to references at these paths
+    #    auto_version_reference_at_paths: Device.patient, Device.location, Device.parent, DeviceMetric.parent, DeviceMetric.source, Observation.device, Observation.subject
     #    ips_enabled: false
     #    default_encoding: JSON
     #    default_pretty_print: true
@@ -127,10 +140,10 @@ hapi:
     #    filter_search_enabled: true
     #    graphql_enabled: true
     narrative_enabled: false
-    #    mdm_enabled: true
+    mdm_enabled: false
+    mdm_rules_json_location: "mdm-rules.json"
     #    local_base_urls:
     #      - https://hapi.fhir.org/baseR4
-    mdm_enabled: false
     #    partitioning:
     #      allow_references_across_partitions: false
     #      partitioning_include_in_search_hashes: false
@@ -202,7 +215,7 @@ hapi:
 #        quitWait:
 #    lastn_enabled: true
 #    store_resource_in_lucene_index_enabled: true
-###  This is configuration for normalized quantity serach level default is 0
+###  This is configuration for normalized quantity search level default is 0
 ###   0: NORMALIZED_QUANTITY_SEARCH_NOT_SUPPORTED - default
 ###   1: NORMALIZED_QUANTITY_STORAGE_SUPPORTED
 ###   2: NORMALIZED_QUANTITY_SEARCH_SUPPORTED

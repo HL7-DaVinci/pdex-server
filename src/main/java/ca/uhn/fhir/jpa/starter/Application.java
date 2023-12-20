@@ -3,7 +3,10 @@ package ca.uhn.fhir.jpa.starter;
 import ca.uhn.fhir.batch2.jobs.config.Batch2JobsConfig;
 import ca.uhn.fhir.jpa.batch2.JpaBatch2Config;
 import ca.uhn.fhir.jpa.starter.annotations.OnEitherVersion;
+import ca.uhn.fhir.jpa.starter.cdshooks.StarterCdsHooksConfig;
 import ca.uhn.fhir.jpa.starter.common.FhirTesterConfig;
+import ca.uhn.fhir.jpa.starter.cr.StarterCrDstu3Config;
+import ca.uhn.fhir.jpa.starter.cr.StarterCrR4Config;
 import ca.uhn.fhir.jpa.starter.mdm.MdmConfig;
 import ca.uhn.fhir.jpa.starter.resourceProvider.MemberMatchProvider;
 import ca.uhn.fhir.jpa.subscription.channel.config.SubscriptionChannelConfig;
@@ -35,6 +38,9 @@ import org.springframework.web.servlet.DispatcherServlet;
 @ServletComponentScan(basePackageClasses = {RestfulServer.class})
 @SpringBootApplication(exclude = {ElasticsearchRestClientAutoConfiguration.class, ThymeleafAutoConfiguration.class})
 @Import({
+	StarterCrR4Config.class,
+	StarterCrDstu3Config.class,
+	StarterCdsHooksConfig.class,
 	SubscriptionSubmitterConfig.class,
 	SubscriptionProcessorConfig.class,
 	SubscriptionChannelConfig.class,
