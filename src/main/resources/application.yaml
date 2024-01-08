@@ -57,7 +57,7 @@ hapi:
     ### This flag when enabled to true, will avail evaluate measure operations from CR Module.
     ### Flag is false by default, can be passed as command line argument to override.
     cr:
-      enabled: false
+      enabled: true
 
     cdshooks:
       enabled: true
@@ -100,8 +100,8 @@ hapi:
         packageUrl: http://build.fhir.org/ig/HL7/davinci-epdx/package.tgz
         name: hl7.fhir.us.davinci-pdex
         version: 2.0.0
-    #    fetchDependencies: true
-        installMode: STORE_AND_INSTALL
+        fetchDependencies: true
+        installMode: STORE_ONLY
         reloadExisting: false
     #    supported_resource_types:
     #      - Patient
@@ -163,7 +163,7 @@ hapi:
     search-coord-queue-capacity: 200
     
     # comma-separated package names, will be @ComponentScan'ed by Spring to allow for creating custom Spring beans
-    # custom-bean-packages: 
+    custom-bean-packages: com.lantanagroup.pdex.cdshooks
     
     # comma-separated list of fully qualified interceptor classes. 
     # classes listed here will be fetched from the Spring context when combined with 'custom-bean-packages', 
