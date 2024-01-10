@@ -1,4 +1,4 @@
-package ca.uhn.fhir.jpa.starter.resourceProvider;
+package com.lantanagroup.pdex.resourceProvider;
 
 /* -----------------------------------------------------------------------
 // Corey Spears - This class is added to handle the $member-match operation.
@@ -6,6 +6,10 @@ package ca.uhn.fhir.jpa.starter.resourceProvider;
 // from hapi-fhir-jpaserver-base-6.4.0.jar, ca.uhn.fhir.jpa.provider.r4.MemberMatchR4ResourceProvider;
 // but makes some updates for the latest publication of HRex
 ----------------------------------------------------------------------- */
+
+// Rick Geimer: this class needs to be registered in ca.uhn.fhir.jpa.starter.common.StarterJpaConfig in the restfulServer() method as follows:
+// fhirServer.registerProvider(new MemberMatchProvider(fhirServer.getFhirContext(), daoRegistry));
+
 
 
 import javax.servlet.http.HttpServletRequest;

@@ -61,6 +61,8 @@ import ca.uhn.fhir.rest.server.util.ISearchParamRegistry;
 import ca.uhn.fhir.validation.IValidatorModule;
 import ca.uhn.fhir.validation.ResultSeverityEnum;
 import com.google.common.base.Strings;
+import com.lantanagroup.pdex.resourceProvider.MemberMatchProvider;
+
 import org.hl7.fhir.common.hapi.validation.support.CachingValidationSupport;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -79,9 +81,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import static ca.uhn.fhir.jpa.starter.common.validation.IRepositoryValidationInterceptorFactory.ENABLE_REPOSITORY_VALIDATING_INTERCEPTOR;
-
-// Added by Corey Spears to register custom member-match operation
-import ca.uhn.fhir.jpa.starter.resourceProvider.MemberMatchProvider;
 
 @Configuration
 // allow users to configure custom packages to scan for additional beans
