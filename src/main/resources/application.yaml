@@ -97,12 +97,12 @@ hapi:
 #        name: us.nlm.vsac
 #        version: 0.9.0
       pdex:
-        packageUrl: http://build.fhir.org/ig/HL7/davinci-epdx/package.tgz
+        packageUrl: https://www.hl7.org/fhir/us/davinci-pdex/package.tgz
         name: hl7.fhir.us.davinci-pdex
         version: 2.0.0
         fetchDependencies: true
         installMode: STORE_ONLY
-        reloadExisting: false
+        reloadExisting: true
     #    supported_resource_types:
     #      - Patient
     #      - Observation
