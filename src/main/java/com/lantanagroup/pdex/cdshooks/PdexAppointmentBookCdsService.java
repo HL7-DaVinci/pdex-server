@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PdexAppointmentBookCdsService { 
 	
-   @CdsService(value = "pdex-appointment-book-service",
+   @CdsService(value = "appointment-book",
       hook = "appointment-book",
       title = "Book an appointment",
       description = "This service books an appointment for the patient",
@@ -27,13 +27,13 @@ public class PdexAppointmentBookCdsService {
          @CdsServicePrefetch(value = "encounter", query = "Encounter/{{context.encounterId}}")
       })
    
-   public CdsServiceResponseJson exampleService(CdsServiceRequestJson theCdsRequest) {
+   public CdsServiceResponseJson appointmentBook(CdsServiceRequestJson theCdsRequest) {
       Patient patient = (Patient) theCdsRequest.getPrefetch("patient");
       Encounter encounter = (Encounter) theCdsRequest.getPrefetch("encounter");
       Bundle appts = (Bundle) theCdsRequest.getContext().getResource("appointments");
       CdsServiceResponseJson response = new CdsServiceResponseJson();
       CdsServiceResponseCardJson card = new CdsServiceResponseCardJson();
-      card.setSummary("Hello " + patient.getNameFirstRep().getNameAsSingleString());
+      if (patient != null) card.setSummary("Hello " + patient.getNameFirstRep().getNameAsSingleString());
       card.setIndicator(CdsServiceIndicatorEnum.INFO);
       CdsServiceResponseCardSourceJson source = new CdsServiceResponseCardSourceJson();
       source.setLabel("PDex Server Reference Implementation");
@@ -43,7 +43,7 @@ public class PdexAppointmentBookCdsService {
    }
 
    @CdsServiceFeedback("example-service")
-   public String exampleServiceFeedback(CdsServiceFeedbackJson theFeedback) {
+   public String appointmentBookFeedback(CdsServiceFeedbackJson theFeedback) {
       return "{\"message\": \"Thank you for your feedback dated " + theFeedback.getOutcomeTimestamp() + "!\"}";
    }
 }

@@ -89,10 +89,13 @@ public class CdsHooksServlet extends HttpServlet {
 			logger.info(request.getRequestURI());
 			String service = request.getPathInfo().replace("/", "");
 
+			logger.info("Service: " + service);
 			String requestJson = request.getReader().lines().collect(Collectors.joining());
 			CdsHooksRequest cdsHooksRequest = objectMapper.readValue(requestJson, CdsHooksRequest.class);
 			logRequestInfo(cdsHooksRequest, requestJson);
-
+			
+			logger.info("Available services: " + cdsServiceRegistry.getCdsServicesJson());
+			
 			CdsServiceResponseJson serviceResponseJson = cdsServiceRegistry.callService(service, cdsHooksRequest);
 
 			// Using GSON pretty print format as Jackson's is ugly
@@ -107,8 +110,10 @@ public class CdsHooksServlet extends HttpServlet {
 		} catch (BaseServerResponseException e) {
 			ErrorHandling.handleError(response, "ERROR: Exception connecting to remote server.", e, appProperties);
 			logger.error(e.toString());
+			e.printStackTrace();
 		} catch (Exception e) {
 			logger.error(e.toString());
+			e.printStackTrace();
 			throw new ServletException("ERROR: Exception in cds-hooks processing.", e);
 		}
 	}
