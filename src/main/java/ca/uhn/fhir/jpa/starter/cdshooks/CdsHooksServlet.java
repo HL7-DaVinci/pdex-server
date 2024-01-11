@@ -10,6 +10,8 @@ import ca.uhn.hapi.fhir.cdshooks.api.json.CdsServicesJson;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
+import com.lantanagroup.pdex.cdshooks.PdexCdsHooksRequest;
+
 import org.apache.http.entity.ContentType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,7 +93,10 @@ public class CdsHooksServlet extends HttpServlet {
 
 			logger.info("Service: " + service);
 			String requestJson = request.getReader().lines().collect(Collectors.joining());
-			CdsHooksRequest cdsHooksRequest = objectMapper.readValue(requestJson, CdsHooksRequest.class);
+			logger.info(requestJson);
+			// Rick Geimer: replaced with custom PdexCdsHooksRequest, which allows extensions
+			// CdsHooksRequest cdsHooksRequest = objectMapper.readValue(requestJson, CdsHooksRequest.class);
+			PdexCdsHooksRequest cdsHooksRequest = objectMapper.readValue(requestJson, PdexCdsHooksRequest.class);
 			logRequestInfo(cdsHooksRequest, requestJson);
 			
 			logger.info("Available services: " + cdsServiceRegistry.getCdsServicesJson());
