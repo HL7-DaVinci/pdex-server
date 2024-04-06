@@ -5,6 +5,15 @@ management:
     web:
       exposure:
         include: "health,prometheus"
+security:
+  enable-auth: false
+  bypass-header: X-Allow-Public-Access
+  # client-id: 
+  # client-secret: 
+  issuer: 
+  authorization-url: 
+  introspection-url: 
+  token-url: 
 spring:
   main:
     allow-circular-references: true

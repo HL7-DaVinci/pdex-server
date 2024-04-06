@@ -26,12 +26,20 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
+import com.lantanagroup.pdex.CapabilityStatementCustomizer;
+import com.lantanagroup.pdex.security.AuthInterceptor;
+import com.lantanagroup.pdex.security.SearchInterceptor;
+import com.lantanagroup.pdex.security.SecurityProperties;
+import com.lantanagroup.pdex.security.SmartDiscoveryInterceptor;
 
+
+@ComponentScan(basePackages = {"ca.uhn.fhir.jpa.starter", "com.lantanagroup.pdex"})
 @ServletComponentScan(basePackageClasses = {RestfulServer.class})
 @SpringBootApplication(exclude = {ElasticsearchRestClientAutoConfiguration.class, ThymeleafAutoConfiguration.class})
 @Import({
@@ -65,9 +73,23 @@ public class Application extends SpringBootServletInitializer {
   @Autowired
   AutowireCapableBeanFactory beanFactory;
 
+  @Autowired
+  AppProperties appProperties;
+  @Autowired
+  SecurityProperties securityProperties;
+
   @Bean
   @Conditional(OnEitherVersion.class)
   public ServletRegistrationBean hapiServletRegistration(RestfulServer restfulServer) {
+
+    // Register capability statement customizer
+    restfulServer.registerInterceptor(new CapabilityStatementCustomizer(appProperties, securityProperties));
+
+    // Add interceptors for SMART on FHIR support
+    restfulServer.registerInterceptor(new SmartDiscoveryInterceptor(appProperties, securityProperties));
+    restfulServer.registerInterceptor(new AuthInterceptor(appProperties, securityProperties));
+    restfulServer.registerInterceptor(new SearchInterceptor(appProperties, securityProperties));
+
     ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean();
     /* Removed by Corey Spears, Added registerProvider to StarterJpaConfig instead
     // Added by Rick Geimer to wire custom operations
