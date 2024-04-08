@@ -62,6 +62,7 @@ import ca.uhn.fhir.validation.IValidatorModule;
 import ca.uhn.fhir.validation.ResultSeverityEnum;
 import com.google.common.base.Strings;
 import com.lantanagroup.pdex.resourceProvider.MemberMatchProvider;
+import com.lantanagroup.pdex.security.SecurityProperties;
 
 import org.hl7.fhir.common.hapi.validation.support.CachingValidationSupport;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -108,6 +109,9 @@ public class StarterJpaConfig {
 
 	@Autowired
 	private ConfigurableEnvironment configurableEnvironment;
+
+	@Autowired
+	private SecurityProperties securityProperties;
 
 	/**
 	 * Customize the default/max page sizes for search results. You can set these however
@@ -230,6 +234,10 @@ public class StarterJpaConfig {
 		config.addAllowedHeader("x-fhir-starter");
 		config.addAllowedHeader("X-Requested-With");
 		config.addAllowedHeader("Prefer");
+
+		if (securityProperties.getBypassHeader() != null && !securityProperties.getBypassHeader().isEmpty()) {
+			config.addAllowedHeader(securityProperties.getBypassHeader());
+		}
 
 		List<String> allAllowedCORSOrigins = appProperties.getCors().getAllowed_origin();
 		allAllowedCORSOrigins.forEach(config::addAllowedOriginPattern);
