@@ -14,6 +14,9 @@ public class SecurityProperties {
 	Boolean enableAuth;
 
   @Getter @Setter
+	Boolean enableProxy;
+
+  @Getter @Setter
   String bypassHeader;
 
   @Getter @Setter

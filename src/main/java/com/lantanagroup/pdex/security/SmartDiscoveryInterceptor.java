@@ -32,16 +32,26 @@ public class SmartDiscoveryInterceptor {
   @Hook(Pointcut.SERVER_INCOMING_REQUEST_PRE_PROCESSED)
   public boolean incomingRequestPreProcessed(HttpServletRequest theRequest, HttpServletResponse theResponse) throws IOException {
 
-    if (!theRequest.getRequestURI().equals("/fhir/.well-known/smart-configuration")) {
+    String endPoint = "/fhir/.well-known/smart-configuration";
+
+    if (!theRequest.getRequestURI().equals(endPoint)) {
       return true;
     }
 
     // myLogger.info("Intercepted request to /fhir/.well-known/smart-configuration");
 
     SmartConfigurationObject smartConfig = new SmartConfigurationObject();
+    
+    if (securityProperties.getEnableProxy()) {
+      String baseUrl = theRequest.getRequestURL().substring(0, theRequest.getRequestURL().indexOf(endPoint));
+      smartConfig.setToken_endpoint(baseUrl + "/auth/token");
+    } else {
+      smartConfig.setToken_endpoint(securityProperties.getTokenUrl());
+    }
     smartConfig.setAuthorization_endpoint(securityProperties.getAuthorizationUrl());
+
+    smartConfig.setCapabilities(new String[] { "launch-standalone" });
     smartConfig.setGrant_types_supported(new String[] { "authorization_code", "client_credentials" });
-    smartConfig.setToken_endpoint(securityProperties.getTokenUrl());
     smartConfig.setCode_challenge_methods_supported(new String[] { "S256" });
 
     theResponse.setContentType("application/json");

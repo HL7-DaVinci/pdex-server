@@ -7,6 +7,7 @@ management:
         include: "health,prometheus"
 security:
   enable-auth: false
+  enable-proxy: false
   bypass-header: X-Allow-Public-Access
   # client-id: 
   # client-secret: 

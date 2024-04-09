@@ -9,6 +9,9 @@ public class SmartConfigurationObject {
   String authorization_endpoint;
 
   @Getter @Setter
+  String[] capabilities;
+
+  @Getter @Setter
   String[] grant_types_supported;
 
   @Getter @Setter
