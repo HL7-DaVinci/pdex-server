@@ -15,6 +15,7 @@ import ca.uhn.fhir.interceptor.api.Hook;
 import ca.uhn.fhir.interceptor.api.Interceptor;
 import ca.uhn.fhir.interceptor.api.Pointcut;
 import ca.uhn.fhir.jpa.starter.AppProperties;
+import ca.uhn.fhir.rest.server.servlet.ServletRequestDetails;
 
 @Interceptor
 public class CapabilityStatementCustomizer {
@@ -28,7 +29,7 @@ public class CapabilityStatementCustomizer {
   }
   
   @Hook(Pointcut.SERVER_CAPABILITY_STATEMENT_GENERATED)
-  public void customize(IBaseConformance theCapabilityStatement) {
+  public void customize(IBaseConformance theCapabilityStatement, ServletRequestDetails theRequest) {
 
     CapabilityStatement cs = (CapabilityStatement) theCapabilityStatement;
 
@@ -42,7 +43,13 @@ public class CapabilityStatementCustomizer {
     ArrayList<Extension> uris = new ArrayList<Extension>();
     uris.add(new Extension("authorize", new UriType(securityProperties.getAuthorizationUrl())));
     uris.add(new Extension("introspect", new UriType(securityProperties.getIntrospectionUrl())));
-    uris.add(new Extension("token", new UriType(securityProperties.getTokenUrl())));
+    
+    if (securityProperties.getEnableProxy()) {
+      String baseUrl = theRequest.getCompleteUrl().substring(0, theRequest.getCompleteUrl().indexOf("/fhir"));
+      uris.add(new Extension("token", new UriType(baseUrl + "/auth/token")));
+    } else {
+      uris.add(new Extension("token", new UriType(securityProperties.getTokenUrl())));
+    }
     oauthExtension.setUrl("http://fhir-registry.smarthealthit.org/StructureDefinition/oauth-uris");
     oauthExtension.setExtension(uris);
 

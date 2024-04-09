@@ -1,36 +1,40 @@
 # PDex FHIR Server (based on HAPI-FHIR Starter Project)
 
-This project is a complete starter project you can use to deploy a FHIR server using HAPI FHIR JPA.
+This project is based on the [HAPI-FHIR JPA Server Starter Project](https://github.com/hapifhir/hapi-fhir-jpaserver-starter)
 
-Note that this project is specifically intended for end users of the HAPI FHIR JPA server module (in other words, it helps you implement HAPI FHIR, it is not the source of the library itself). If you are looking for the main HAPI FHIR project, see here: https://github.com/hapifhir/hapi-fhir
 
-Need Help? Please see: https://github.com/hapifhir/hapi-fhir/wiki/Getting-Help
+## Quick Start
 
-## Prerequisites
+### Requirements
 
-In order to use this sample, you should have:
+- Java 11+
+- Maven
 
-- [This project](https://github.com/hapifhir/hapi-fhir-jpaserver-starter) checked out. You may wish to create a GitHub Fork of the project and check that out instead so that you can customize the project and save the results to GitHub.
-
-### and either
- - Oracle Java (JDK) installed: Minimum JDK8 or newer.
- - Apache Maven build tool (newest version)
-
-### or
- - Docker, as the entire project can be built using multistage docker (with both JDK and maven wrapped in docker) or used directly from [Docker Hub](https://hub.docker.com/r/hapiproject/hapi)
-
-## Running via [Docker Hub](https://hub.docker.com/r/hapiproject/hapi)
-
-Each tagged/released version of `hapi-fhir-jpaserver` is built as a Docker image and published to Docker hub. To run the published Docker image from DockerHub:
+### Build and Run
 
 ```
-docker pull hapiproject/hapi:latest
-docker run -p 8080:8080 hapiproject/hapi:latest
+git clone https://github.com/HL7-DaVinci/pdex-server/
+cd pdex-server
+mvn -Pjetty jetty:run
 ```
 
-This will run the docker image with the default configuration, mapping port 8080 from the container to port 8080 in the host. Once running, you can access `http://localhost:8080/` in the browser to access the HAPI FHIR server's UI or use `http://localhost:8080/fhir/` as the base URL for your REST requests.
+## Security
+The server supports requiring an auth token for resource requests if the `security.enable-auth` property is set to `true`. If this is enabled, requests can bypass this requirement by including the value set in `security.bypass-header` in the header of the request. The default value for this header is `X-Allow-Public-Access`.
 
-If you change the mapped port, you need to change the configuration used by HAPI to have the correct `hapi.fhir.tester` property/value.
+With security enabled, the configuration values `security.issuer`, `security.authorization-url`, and `security.token-url` should be set at a minimum.  Optionally, the `security.introspection-url` should be set if the confidential client properties of `security.client-id` and `security.client-secret` are not set.
+
+[SMART on FHIR](https://build.fhir.org/ig/HL7/smart-app-launch/) clients can perform a patient standalone launch against this server.  This will require a properly configured identity provider to provide the necessary user autehntication and ultimately an access token as described in the [SMART example app launch](https://build.fhir.org/ig/HL7/smart-app-launch/example-app-launch-public.html).  
+
+The provider must be capable of providing custom properties in the token endpoint such as `patient` to provide the patient context for the launch.
+
+One popular solution for an identity provider is [Keycloak](https://www.keycloak.org/) which can be easily run in Docker using the [getting started guide](https://www.keycloak.org/getting-started/getting-started-docker).  However, to provide custom properties on the token endpoint requires custom code.  One solution for this is the [Keycloak extensions for FHIR project](https://github.com/Alvearie/keycloak-extensions-for-fhir).  However, this project is dependent on an outdated version of Keycloak.  
+
+For convenience, this server provides a configuration option at `security.enable-proxy` that will cause the server to provide a token endpoint.  The response clients will receive during the discovery step of a SMART launch at `/fhir/.well-known/smart-configuration` will show the `token_endpoint` as the server's `/auth/token` endpoint.  Requests to this endpoint will be proxied to the configured `security.token-url` and add the necessary properties to the response based on the claims in the received `access_token`.
+
+Additionally, an exported configuration for Keycloak is provided that will create a realm named `pdex` with common [SMART on FHIR scopes](https://build.fhir.org/ig/HL7/smart-app-launch/scopes-and-launch-context.html) and two clients: a confidential client named `pdex-server` and a public client named `smart-client`.  This can be imported by logging into Keycloak and creating a new realm using the `pdex-keycloak-realm.json` file.
+
+Creating the realm with this file will not create any users.  When creating users in the realm, custom attributes should be set to connect the user to a FHIR resource.  For example, set the `patient` attribute to a corresponding patient FHIR ID.  When combined with setting `security.enable-proxy` to `true`, this will allow the server to provide the correct patient context in the token response when a client requests a patient launch.
+
 
 ### Configuration via environment variables
 
