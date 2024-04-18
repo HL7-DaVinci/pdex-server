@@ -121,9 +121,6 @@ public class MemberMatchProvider implements IResourceProvider {
     // outParams has some old parameter names that need to be replaced
     Parameters outParams = new Parameters();
     //IBaseParameters parameters = ParametersUtil.newInstance(myFhirContext);
-    outParams.addParameter().setName(Constants.PARAM_MEMBER_PATIENT).setResource(tempParams.getParameter(Constants.PARAM_MEMBER_PATIENT).getResource());
-    outParams.addParameter().setName("CoverageToLink").setResource(tempParams.getParameter(Constants.PARAM_NEW_COVERAGE).getResource());
-    outParams.addParameter().setName(Constants.PARAM_CONSENT).setResource(tempParams.getParameter(Constants.PARAM_CONSENT).getResource());
     outParams.addParameter().setName(Constants.PARAM_MEMBER_IDENTIFIER).setValue(tempParams.getParameter(Constants.PARAM_MEMBER_IDENTIFIER).getValue());
     
   
