@@ -9,6 +9,19 @@
             "projectName": "hapi-fhir-jpaserver-starter",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Launch Java Program",
+            "request": "launch",
+            "mainClass": "ca.uhn.fhir.jpa.starter.Application"
+        },
+        {
+            "type": "java",
+            "name": "Attach",
+            "request": "attach",
+            "hostName": "localhost",
+            "port": "8000"
         }
     ]
 }

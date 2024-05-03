@@ -21,7 +21,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <logback-classic.version>1.2.11</logback-classic.version>
         <slf4j-api.version>1.7.25</slf4j-api.version>
     </properties>

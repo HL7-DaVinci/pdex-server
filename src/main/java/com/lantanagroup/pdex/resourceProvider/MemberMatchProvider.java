@@ -78,9 +78,9 @@ public class MemberMatchProvider implements IResourceProvider {
    */
   public MemberMatchProvider(FhirContext ctx, DaoRegistry daoRegistry) {
     myFhirContext = ctx;
-    theCoverageDao = daoRegistry.getResourceDao("Coverage");
-    thePatientDao = daoRegistry.getResourceDao("Patient");
-    theConsentDao = daoRegistry.getResourceDao("Consent");
+    theCoverageDao = daoRegistry.getResourceDao(Coverage.class);
+    thePatientDao = daoRegistry.getResourceDao(Patient.class);
+    theConsentDao = daoRegistry.getResourceDao(Consent.class);
     // MemberMatcherR4Helper seems to have theExtensionProvider as a no operation stub.
     //theExtensionProvider = 
     
@@ -129,7 +129,7 @@ public class MemberMatchProvider implements IResourceProvider {
 	}
   
 
-  private Parameters doMemberMatchOperation(Patient theMemberPatient,
+  public Parameters doMemberMatchOperation(Patient theMemberPatient,
 															Coverage theCoverageToMatch, Coverage theCoverageToLink, Consent theConsent, RequestDetails theRequestDetails) {
 
 		validateParams(theMemberPatient, theCoverageToMatch, theCoverageToLink, theConsent);

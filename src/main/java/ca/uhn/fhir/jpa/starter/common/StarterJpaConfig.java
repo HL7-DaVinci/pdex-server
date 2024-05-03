@@ -367,8 +367,9 @@ public class StarterJpaConfig {
 		}
 
 		// Added by Corey Spears to register custom member-match operation
-		fhirServer.registerProvider(new MemberMatchProvider(fhirServer.getFhirContext(), daoRegistry));
-		fhirServer.registerProvider(new BulkMemberMatchProvider(fhirServer.getFhirContext(), daoRegistry));
+		MemberMatchProvider memberMatchProvider = new MemberMatchProvider(fhirServer.getFhirContext(), daoRegistry);
+		fhirServer.registerProvider(memberMatchProvider);
+		fhirServer.registerProvider(new BulkMemberMatchProvider(fhirServer.getFhirContext(), daoRegistry, memberMatchProvider));
 
 		/*
 		 * If you are using DSTU3+, you may want to add a terminology uploader, which allows
