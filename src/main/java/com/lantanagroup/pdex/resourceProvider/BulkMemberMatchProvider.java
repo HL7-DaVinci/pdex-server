@@ -95,19 +95,23 @@ public class BulkMemberMatchProvider {
 
       String refId = String.format("#%s", memberPatient.getIdPart());
       Extension extension = new Extension(MATCH_PARAMETERS_EXTENSION, new Reference(refId));
-      Reference reference = new Reference().setReference(memberPatient.getId());
-      reference.addExtension(extension);
       
       try {
         memberMatchProvider.doMemberMatchOperation(memberPatient, oldCoverage, newCoverage, consent, theRequestDetails);
 
+        Reference reference = new Reference().setReference(memberPatient.getId());
+        reference.addExtension(extension);
+        
         matchGroup.addContained(memberPatient);
         matchGroup.addMember().setEntity(reference);
 
       } catch (UnprocessableEntityException e) {
 
         // doMemberMatch throws an UnprocessableEntityException if match fails, consent failure is one specific case with a specific message,
-        // the rest will be put in the 
+        // the rest will be put in the "no match" group
+
+        Reference reference = new Reference().setReference(refId);
+        reference.addExtension(extension);
 
         if (e.getMessage().startsWith(Msg.code(2147))) {
           consentGroup.addContained(memberPatient);
