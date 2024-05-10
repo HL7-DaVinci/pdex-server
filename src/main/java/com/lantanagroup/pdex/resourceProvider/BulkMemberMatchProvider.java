@@ -95,7 +95,7 @@ public class BulkMemberMatchProvider {
 
       String refId = String.format("#%s", memberPatient.getIdPart());
       Extension extension = new Extension(MATCH_PARAMETERS_EXTENSION, new Reference(refId));
-      Reference reference = new Reference().setReference(refId);
+      Reference reference = new Reference().setReference(memberPatient.getId());
       reference.addExtension(extension);
       
       try {
