@@ -371,6 +371,9 @@ public class StarterJpaConfig {
 		fhirServer.registerProvider(memberMatchProvider);
 		fhirServer.registerProvider(new BulkMemberMatchProvider(fhirServer.getFhirContext(), daoRegistry, memberMatchProvider));
 
+		// Register Process Customizer that will do initial load (and possibly other things)
+		fhirServer.registerInterceptor(new ProcessCustomizer(fhirServer.getFhirContext(), daoRegistry));
+
 		/*
 		 * If you are using DSTU3+, you may want to add a terminology uploader, which allows
 		 * uploading of external terminologies such as Snomed CT. Note that this uploader

@@ -1,0 +1,62 @@
+{
+  "resourceType" : "Group",
+  "id" : "Example-PDex-Provider-Group",
+  "meta" : {
+    "lastUpdated" : "2024-03-21T17:18:00.000Z",
+    "profile" : ["http://hl7.org/fhir/us/davinci-pdex/StructureDefinition/pdex-provider-group"]
+  },
+  "text" : {
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Group</b><a name=\"Example-PDex-Provider-Group\"> </a><a name=\"hcExample-PDex-Provider-Group\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Group &quot;Example-PDex-Provider-Group&quot; Updated &quot;2024-03-21 17:18:00+0000&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-pdex-provider-group.html\">PDex Provider Group</a></p></div><p><b>Attribution List Status</b>: final</p><p><b>Members Opted-out</b>: 5</p><p><b>identifier</b>: <a href=\"http://terminology.hl7.org/5.5.0/NamingSystem-npi.html\" title=\"National Provider Identifier\">United States National Provider Identifier</a>/1122334455, <a href=\"http://terminology.hl7.org/5.5.0/NamingSystem-USEIN.html\" title=\"An Employer Identification Number (EIN) is also known as a Federal Tax Identification Number, and is used to identify a business entity.\">United States Employer Identification Number</a>/99-12345</p><p><b>active</b>: true</p><p><b>type</b>: person</p><p><b>actual</b>: true</p><p><b>code</b>: PDex Provider Group <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-PdexMemberAttributionCS.html\">PDex Provider Access API Attribution Code System</a>#pdexprovidergroup)</span></p><p><b>name</b>: Attributed List of Health Plan Members for Practitioner 1122334455.</p><p><b>managingEntity</b>: <a href=\"Organization-ProviderOrg1.html\">Organization/ProviderOrg1</a> &quot;Provider 1&quot;</p><blockquote><p><b>member</b></p><blockquote><p><b>id</b></p>0</blockquote><p><b>Member Last Transmission</b>: 2024-03-21 17:18:00+0000</p><p><b>Member Last Resource Types</b>: Patient,Condition,Observation,Procedure</p><p><b>Member Last Resource Filters</b>: Condition?recordedDate=ge2023-09-23,Procedure?performed=ge2023-03-21</p><p><b>entity</b>: <a href=\"Patient-1001.html\">Patient/1001</a> &quot; PERSON&quot;</p></blockquote></div>"
+  },
+  "extension" : [{
+    "url" : "http://hl7.org/fhir/us/davinci-atr/StructureDefinition/ext-attributionListStatus",
+    "valueCode" : "final"
+  },
+  {
+    "url" : "http://hl7.org/fhir/us/davinci-pdex/StructureDefinition/base-ext-members-opted-out",
+    "valueQuantity" : {
+      "value" : 5
+    }
+  }],
+  "identifier" : [{
+    "system" : "http://hl7.org/fhir/sid/us-npi",
+    "value" : "1122334455"
+  },
+  {
+    "system" : "urn:oid:2.16.840.1.113883.4.4",
+    "value" : "99-12345"
+  }],
+  "active" : true,
+  "type" : "person",
+  "actual" : true,
+  "code" : {
+    "coding" : [{
+      "system" : "http://hl7.org/fhir/us/davinci-pdex/CodeSystem/PdexMemberAttributionCS",
+      "code" : "pdexprovidergroup",
+      "display" : "PDex Provider Group"
+    }]
+  },
+  "name" : "Attributed List of Health Plan Members for Practitioner 1122334455.",
+  "managingEntity" : {
+    "reference" : "Organization/ProviderOrg1"
+  },
+  "member" : [{
+    "id" : "0",
+    "extension" : [{
+      "url" : "http://hl7.org/fhir/us/davinci-pdex/StructureDefinition/base-ext-last-transmission",
+      "valueDateTime" : "2024-03-21T17:18:00.000Z"
+    },
+    {
+      "url" : "http://hl7.org/fhir/us/davinci-pdex/StructureDefinition/base-ext-last-types",
+      "valueString" : "Patient,Condition,Observation,Procedure"
+    },
+    {
+      "url" : "http://hl7.org/fhir/us/davinci-pdex/StructureDefinition/base-ext-last-typefilter",
+      "valueString" : "Condition?recordedDate=ge2023-09-23,Procedure?performed=ge2023-03-21"
+    }],
+    "entity" : {
+      "reference" : "Patient/1001"
+    }
+  }]
+}

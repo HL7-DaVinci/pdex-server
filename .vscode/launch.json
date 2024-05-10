@@ -2,16 +2,6 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Spring Boot-Application<hapi-fhir-jpaserver-starter>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "ca.uhn.fhir.jpa.starter.Application",
-            "projectName": "hapi-fhir-jpaserver-starter",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
-        },
-        {
-            "type": "java",
             "name": "Launch Java Program",
             "request": "launch",
             "mainClass": "ca.uhn.fhir.jpa.starter.Application"
@@ -22,6 +12,16 @@
             "request": "attach",
             "hostName": "localhost",
             "port": "8000"
+        },
+        {
+            "type": "java",
+            "name": "Outdated - Spring Boot-Application<hapi-fhir-jpaserver-starter>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "ca.uhn.fhir.jpa.starter.Application",
+            "projectName": "hapi-fhir-jpaserver-starter",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
