@@ -1,5 +1,6 @@
 package ca.uhn.fhir.jpa.starter.common;
 
+import ca.uhn.fhir.batch2.api.IJobCoordinator;
 import ca.uhn.fhir.batch2.coordinator.JobDefinitionRegistry;
 import ca.uhn.fhir.batch2.jobs.export.BulkDataExportProvider;
 import ca.uhn.fhir.batch2.jobs.imprt.BulkDataImportProvider;
@@ -61,6 +62,7 @@ import ca.uhn.fhir.rest.server.util.ISearchParamRegistry;
 import ca.uhn.fhir.validation.IValidatorModule;
 import ca.uhn.fhir.validation.ResultSeverityEnum;
 import com.google.common.base.Strings;
+import com.lantanagroup.pdex.export.DavinciDataExportProvider;
 import com.lantanagroup.pdex.resourceProvider.BulkMemberMatchProvider;
 import com.lantanagroup.pdex.resourceProvider.MemberMatchProvider;
 import com.lantanagroup.pdex.security.SecurityProperties;
@@ -284,7 +286,8 @@ public class StarterJpaConfig {
 			ThreadSafeResourceDeleterSvc theThreadSafeResourceDeleterSvc,
 			ApplicationContext appContext,
 			Optional<IpsOperationProvider> theIpsOperationProvider,
-			Optional<IImplementationGuideOperationProvider> implementationGuideOperationProvider) {
+			Optional<IImplementationGuideOperationProvider> implementationGuideOperationProvider,
+			IJobCoordinator theJobCoordinator) {
 		RestfulServer fhirServer = new RestfulServer(fhirSystemDao.getContext());
 
 		List<String> supportedResourceTypes = appProperties.getSupported_resource_types();
@@ -370,6 +373,7 @@ public class StarterJpaConfig {
 		MemberMatchProvider memberMatchProvider = new MemberMatchProvider(fhirServer.getFhirContext(), daoRegistry);
 		fhirServer.registerProvider(memberMatchProvider);
 		fhirServer.registerProvider(new BulkMemberMatchProvider(fhirServer.getFhirContext(), daoRegistry, memberMatchProvider));
+		fhirServer.registerProvider(new DavinciDataExportProvider(fhirServer.getFhirContext(), daoRegistry, theJobCoordinator));
 
 		// Register Process Customizer that will do initial load (and possibly other things)
 		fhirServer.registerInterceptor(new ProcessCustomizer(fhirServer.getFhirContext(), daoRegistry));
