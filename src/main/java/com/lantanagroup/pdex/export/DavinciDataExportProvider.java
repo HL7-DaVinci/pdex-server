@@ -145,23 +145,24 @@ public class DavinciDataExportProvider {
     if (theSince != null) {
       since = theSince.getValue();
 
-      // payer to payer requires overriding the start date if it is more than five
-      // years ago
-      if (theExportType.equals(PAYER_TO_PAYER_EXPORT_TYPE) && since.before(fiveYearsAgo)) {
-        since = fiveYearsAgo;
-      }
+      if (theExportType != null) {
+        // payer to payer requires overriding the start date if it is more than five years ago
+        if (theExportType.equals(PAYER_TO_PAYER_EXPORT_TYPE) && since.before(fiveYearsAgo)) {
+          since = fiveYearsAgo;
+        }
 
-      // provider export can go back as far as January 1, 2016
-      else if (theExportType.equals(PROVIDER_DELTA_EXPORT_TYPE) || theExportType.equals(PROVIDER_DOWNLOAD_EXPORT_TYPE)
-          || theExportType.equals(PROVIDER_SNAPSHOT_EXPORT_TYPE) && since.before(januaryFirstStart)) {
-        since = januaryFirstStart;
+        // provider export can go back as far as January 1, 2016
+        else if (theExportType.equals(PROVIDER_DELTA_EXPORT_TYPE) || theExportType.equals(PROVIDER_DOWNLOAD_EXPORT_TYPE)
+            || theExportType.equals(PROVIDER_SNAPSHOT_EXPORT_TYPE) && since.before(januaryFirstStart)) {
+          since = januaryFirstStart;
+        }
       }
 
     }
 
     // no supplied _since means we need a default start date depending on the export
     // type
-    else {
+    else if (theExportType != null) {
 
       // payer to payer defaults to five years of data
       if (theExportType.equals(PAYER_TO_PAYER_EXPORT_TYPE)) {
