@@ -4,8 +4,7 @@
   "meta" : {
     "lastUpdated" : "2020-10-13T11:10:24-04:00",
     "source" : "Organization/PayerOrganizationExample1",
-    "profile" : ["http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-ExplanationOfBenefit-Outpatient-Institutional-Basis",
-    "http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-ExplanationOfBenefit-Outpatient-Institutional|2.0.0"]
+    "profile" : ["http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-ExplanationOfBenefit-Outpatient-Institutional-Basis"]
   },
   "text" : {
     "status" : "generated",

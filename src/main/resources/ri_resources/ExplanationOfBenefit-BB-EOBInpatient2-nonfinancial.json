@@ -3,8 +3,7 @@
   "id" : "BB-EOBInpatient2-nonfinancial",
   "meta" : {
     "lastUpdated" : "2020-04-28T15:39:36-04:00",
-    "profile" : ["http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-ExplanationOfBenefit-Inpatient-Institutional-Basis",
-    "http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-ExplanationOfBenefit-Inpatient-Institutional|2.0.0"]
+    "profile" : ["http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-ExplanationOfBenefit-Inpatient-Institutional-Basis"]
   },
   "text" : {
     "status" : "generated",

@@ -3,8 +3,7 @@
   "id" : "BB-EOBOral2-nonfinancial",
   "meta" : {
     "lastUpdated" : "2021-10-28T10:23:00-05:00",
-    "profile" : ["http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-ExplanationOfBenefit-Oral-Basis",
-    "http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-ExplanationOfBenefit-Oral|2.0.0"]
+    "profile" : ["http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-ExplanationOfBenefit-Oral-Basis"]
   },
   "language" : "en-US",
   "text" : {
