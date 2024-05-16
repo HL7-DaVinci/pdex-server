@@ -1,0 +1,226 @@
+{
+  "resourceType" : "ExplanationOfBenefit",
+  "id" : "BB-EOBInpatient1-nonfinancial",
+  "meta" : {
+    "lastUpdated" : "2019-12-12T09:14:11+00:00",
+    "profile" : ["http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-ExplanationOfBenefit-Inpatient-Institutional-Basis",
+    "http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-ExplanationOfBenefit-Inpatient-Institutional|2.0.0"]
+  },
+  "language" : "en-US",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en-US\" lang=\"en-US\"><p><b>Generated Narrative: ExplanationOfBenefit</b><a name=\"BB-EOBInpatient1-nonfinancial\"> </a><a name=\"hcBB-EOBInpatient1-nonfinancial\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">ResourceExplanationOfBenefit &quot;BB-EOBInpatient1-nonfinancial&quot; Updated &quot;2019-12-12 09:14:11+0000&quot;  (Language &quot;en-US&quot;) </p><p style=\"margin-bottom: 0px\">Profiles: <a href=\"StructureDefinition-C4BB-ExplanationOfBenefit-Inpatient-Institutional-Basis.html\">C4BB ExplanationOfBenefit Inpatient Institutional Basis</a>, <code>http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-ExplanationOfBenefit-Inpatient-Institutional|2.0.0</code></p></div><p><b>identifier</b>: Unique Claim ID/AW123412341234123412341234123412</p><p><b>status</b>: active</p><p><b>type</b>: Institutional <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://terminology.hl7.org/5.5.0/CodeSystem-claim-type.html\">Claim Type Codes</a>#institutional)</span></p><p><b>subType</b>: Inpatient <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-C4BBInstitutionalClaimSubType.html\">C4BB Institutional Claim SubType Code System</a>#inpatient)</span></p><p><b>use</b>: claim</p><p><b>patient</b>: <a href=\"Patient-Patient2.html\">Patient/Patient2</a> &quot; TEST&quot;</p><p><b>billablePeriod</b>: 2019-01-01 --&gt; 2019-10-31</p><p><b>created</b>: 2019-11-02 00:00:00+0000</p><p><b>insurer</b>: <a href=\"Organization-Payer1.html\">Organization/Payer1-cbb: XXX Health Plan</a> &quot;Organization Payer 1&quot;</p><p><b>provider</b>: <a href=\"Organization-ProviderOrganization1.html\">Organization/ProviderOrganization1: XXX Health Plan</a> &quot;Orange Medical Group&quot;</p><p><b>outcome</b>: partial</p><blockquote><p><b>supportingInfo</b></p><p><b>sequence</b>: 2</p><p><b>category</b>: Admission Period <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-C4BBSupportingInfoType.html\">C4BB Supporting Info Type Code System</a>#admissionperiod)</span></p><p><b>timing</b>: 2011-05-23 --&gt; 2011-05-25</p></blockquote><blockquote><p><b>supportingInfo</b></p><p><b>sequence</b>: 3</p><p><b>category</b>: Claim Received Date <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-C4BBSupportingInfoType.html\">C4BB Supporting Info Type Code System</a>#clmrecvddate)</span></p><p><b>timing</b>: 2011-05-30</p></blockquote><blockquote><p><b>supportingInfo</b></p><p><b>sequence</b>: 4</p><p><b>category</b>: Type of Bill <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-C4BBSupportingInfoType.html\">C4BB Supporting Info Type Code System</a>#typeofbill)</span></p><p><b>code</b>: Dummy <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://terminology.hl7.org/5.0.0/CodeSystem-AHANUBCTypeOfBill.html\">AHA NUBC Type Of Bill Codes</a>#Dummy)</span></p></blockquote><blockquote><p><b>supportingInfo</b></p><p><b>sequence</b>: 5</p><p><b>category</b>: Point Of Origin <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-C4BBSupportingInfoType.html\">C4BB Supporting Info Type Code System</a>#pointoforigin)</span></p><p><b>code</b>: Dummy <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://terminology.hl7.org/5.0.0/CodeSystem-AHANUBCPointOfOriginNonnewborn.html\">AHA NUBC Point of Origin for Non-newborn</a>#Dummy)</span></p></blockquote><blockquote><p><b>supportingInfo</b></p><p><b>sequence</b>: 6</p><p><b>category</b>: Admission Type <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-C4BBSupportingInfoType.html\">C4BB Supporting Info Type Code System</a>#admtype)</span></p><p><b>code</b>: Dummy <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://terminology.hl7.org/5.0.0/CodeSystem-AHANUBCPriorityTypeOfAdmitOrVisit.html\">AHA NUBC Priority (Type) of Admission or Visit</a>#Dummy)</span></p></blockquote><blockquote><p><b>supportingInfo</b></p><p><b>sequence</b>: 7</p><p><b>category</b>: Discharge Status <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-C4BBSupportingInfoType.html\">C4BB Supporting Info Type Code System</a>#discharge-status)</span></p><p><b>code</b>: 11 <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://terminology.hl7.org/5.0.0/CodeSystem-AHANUBCPatientDischargeStatus.html\">AHA NUBC Patient Discharge Status Codes</a>#11)</span></p></blockquote><blockquote><p><b>supportingInfo</b></p><p><b>sequence</b>: 8</p><p><b>category</b>: Medical Record Number <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-C4BBSupportingInfoType.html\">C4BB Supporting Info Type Code System</a>#medicalrecordnumber)</span></p><p><b>value</b>: 1234-234-1243-12345678901m</p></blockquote><blockquote><p><b>supportingInfo</b></p><p><b>sequence</b>: 9</p><p><b>category</b>: Patient Account Number <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-C4BBSupportingInfoType.html\">C4BB Supporting Info Type Code System</a>#patientaccountnumber)</span></p><p><b>value</b>: 1234-234-1243-12345678901a</p></blockquote><h3>Diagnoses</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Sequence</b></td><td><b>Diagnosis[x]</b></td><td><b>Type</b></td></tr><tr><td style=\"display: none\">*</td><td>1</td><td>Concussion w LOC of 30 minutes or less, init <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://terminology.hl7.org/5.0.0/CodeSystem-icd10CM.html\">International Classification of Diseases, 10th Revision, Clinical Modification (ICD-10-CM)</a>#S06.0X1A)</span></td><td>Principal Diagnosis <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://terminology.hl7.org/5.5.0/CodeSystem-ex-diagnosistype.html\">Example Diagnosis Type Codes</a>#principal)</span></td></tr></table><h3>Insurances</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Focal</b></td><td><b>Coverage</b></td></tr><tr><td style=\"display: none\">*</td><td>true</td><td><a href=\"Coverage-Coverage3.html\">Coverage/Coverage3</a></td></tr></table><h3>Items</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Sequence</b></td><td><b>Revenue</b></td><td><b>ProductOrService</b></td><td><b>Serviced[x]</b></td></tr><tr><td style=\"display: none\">*</td><td>1</td><td>Dummy <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://terminology.hl7.org/5.0.0/CodeSystem-AHANUBCRevenueCodes.html\">AHA NUBC Revenue Codes</a>#Dummy)</span></td><td>Not Applicable <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://terminology.hl7.org/5.5.0/CodeSystem-data-absent-reason.html\">DataAbsentReason</a>#not-applicable)</span></td><td>2019-11-02</td></tr></table><h3>Adjudications</h3><table class=\"grid\"><tr><td style=\"display: none\">-</td><td><b>Category</b></td><td><b>Reason</b></td></tr><tr><td style=\"display: none\">*</td><td>Benefit Payment Status <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-C4BBAdjudicationDiscriminator.html\">C4BB Adjudication Discriminator Code System</a>#benefitpaymentstatus)</span></td><td>In Network <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-C4BBPayerAdjudicationStatus.html\">C4BB Payer Adjudication Status Code System</a>#innetwork)</span></td></tr><tr><td style=\"display: none\">*</td><td>Billing Network Status <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-C4BBAdjudicationDiscriminator.html\">C4BB Adjudication Discriminator Code System</a>#billingnetworkstatus)</span></td><td>In Network <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"CodeSystem-C4BBPayerAdjudicationStatus.html\">C4BB Payer Adjudication Status Code System</a>#innetwork)</span></td></tr></table></div>"
+  },
+  "identifier" : [{
+    "type" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBIdentifierType",
+        "code" : "uc"
+      }]
+    },
+    "system" : "https://www.xxxplan.com/fhir/EOBIdentifier",
+    "value" : "AW123412341234123412341234123412"
+  }],
+  "status" : "active",
+  "type" : {
+    "coding" : [{
+      "system" : "http://terminology.hl7.org/CodeSystem/claim-type",
+      "code" : "institutional"
+    }],
+    "text" : "Institutional"
+  },
+  "subType" : {
+    "coding" : [{
+      "system" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBInstitutionalClaimSubType",
+      "code" : "inpatient"
+    }],
+    "text" : "Inpatient"
+  },
+  "use" : "claim",
+  "patient" : {
+    "reference" : "Patient/Patient2"
+  },
+  "billablePeriod" : {
+    "start" : "2019-01-01",
+    "end" : "2019-10-31"
+  },
+  "created" : "2019-11-02T00:00:00+00:00",
+  "insurer" : {
+    "reference" : "Organization/Payer1-cbb",
+    "display" : "XXX Health Plan"
+  },
+  "provider" : {
+    "reference" : "Organization/ProviderOrganization1",
+    "display" : "XXX Health Plan"
+  },
+  "outcome" : "partial",
+  "supportingInfo" : [{
+    "sequence" : 2,
+    "category" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+        "code" : "admissionperiod"
+      }]
+    },
+    "timingPeriod" : {
+      "start" : "2011-05-23",
+      "end" : "2011-05-25"
+    }
+  },
+  {
+    "sequence" : 3,
+    "category" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+        "code" : "clmrecvddate"
+      }]
+    },
+    "timingDate" : "2011-05-30"
+  },
+  {
+    "sequence" : 4,
+    "category" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+        "code" : "typeofbill"
+      }]
+    },
+    "code" : {
+      "coding" : [{
+        "system" : "https://www.nubc.org/CodeSystem/TypeOfBill",
+        "code" : "Dummy"
+      }]
+    }
+  },
+  {
+    "sequence" : 5,
+    "category" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+        "code" : "pointoforigin"
+      }]
+    },
+    "code" : {
+      "coding" : [{
+        "system" : "https://www.nubc.org/CodeSystem/PointOfOrigin",
+        "code" : "Dummy"
+      }]
+    }
+  },
+  {
+    "sequence" : 6,
+    "category" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+        "code" : "admtype"
+      }]
+    },
+    "code" : {
+      "coding" : [{
+        "system" : "https://www.nubc.org/CodeSystem/PriorityTypeOfAdmitOrVisit",
+        "code" : "Dummy"
+      }]
+    }
+  },
+  {
+    "sequence" : 7,
+    "category" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+        "code" : "discharge-status"
+      }]
+    },
+    "code" : {
+      "coding" : [{
+        "system" : "https://www.nubc.org/CodeSystem/PatDischargeStatus",
+        "code" : "11"
+      }]
+    }
+  },
+  {
+    "sequence" : 8,
+    "category" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+        "code" : "medicalrecordnumber"
+      }]
+    },
+    "valueString" : "1234-234-1243-12345678901m"
+  },
+  {
+    "sequence" : 9,
+    "category" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+        "code" : "patientaccountnumber"
+      }]
+    },
+    "valueString" : "1234-234-1243-12345678901a"
+  }],
+  "diagnosis" : [{
+    "sequence" : 1,
+    "diagnosisCodeableConcept" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/sid/icd-10-cm",
+        "code" : "S06.0X1A"
+      }]
+    },
+    "type" : [{
+      "coding" : [{
+        "system" : "http://terminology.hl7.org/CodeSystem/ex-diagnosistype",
+        "code" : "principal"
+      }]
+    }]
+  }],
+  "insurance" : [{
+    "focal" : true,
+    "coverage" : {
+      "reference" : "Coverage/Coverage3"
+    }
+  }],
+  "item" : [{
+    "sequence" : 1,
+    "revenue" : {
+      "coding" : [{
+        "system" : "https://www.nubc.org/CodeSystem/RevenueCodes",
+        "code" : "Dummy"
+      }]
+    },
+    "productOrService" : {
+      "coding" : [{
+        "system" : "http://terminology.hl7.org/CodeSystem/data-absent-reason",
+        "code" : "not-applicable",
+        "display" : "Not Applicable"
+      }]
+    },
+    "servicedDate" : "2019-11-02"
+  }],
+  "adjudication" : [{
+    "category" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBAdjudicationDiscriminator",
+        "code" : "benefitpaymentstatus"
+      }]
+    },
+    "reason" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBPayerAdjudicationStatus",
+        "code" : "innetwork"
+      }]
+    }
+  },
+  {
+    "category" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBAdjudicationDiscriminator",
+        "code" : "billingnetworkstatus"
+      }]
+    },
+    "reason" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBPayerAdjudicationStatus",
+        "code" : "innetwork"
+      }]
+    }
+  }]
+}

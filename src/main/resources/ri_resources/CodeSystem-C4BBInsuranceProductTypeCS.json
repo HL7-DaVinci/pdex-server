@@ -1,0 +1,82 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "C4BBInsuranceProductTypeCS",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This case-sensitive code system <code>http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBInsuranceProductTypeCS</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">hmo<a name=\"C4BBInsuranceProductTypeCS-hmo\"> </a></td><td>Commercial</td><td>Commercial</td></tr><tr><td style=\"white-space:nowrap\">ppo<a name=\"C4BBInsuranceProductTypeCS-ppo\"> </a></td><td>Medicare</td><td>Medicare</td></tr><tr><td style=\"white-space:nowrap\">pos<a name=\"C4BBInsuranceProductTypeCS-pos\"> </a></td><td>Medicare POS</td><td>Medicare Point-of-Service (POS)</td></tr><tr><td style=\"white-space:nowrap\">epo<a name=\"C4BBInsuranceProductTypeCS-epo\"> </a></td><td>Exclusive Provider Organization</td><td>Exclusive Provider Organization</td></tr><tr><td style=\"white-space:nowrap\">work-comp<a name=\"C4BBInsuranceProductTypeCS-work-comp\"> </a></td><td>Worker's Comp</td><td>Worker's Compensation</td></tr><tr><td style=\"white-space:nowrap\">ffs<a name=\"C4BBInsuranceProductTypeCS-ffs\"> </a></td><td>Fee for Service</td><td>Fee for Service</td></tr></table></div>"
+  },
+  "extension" : [{
+    "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
+    "valueCode" : "fm"
+  },
+  {
+    "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+    "valueCode" : "trial-use",
+    "_valueCode" : {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-conformance-derivedFrom",
+        "valueCanonical" : "http://hl7.org/fhir/us/carin-bb/ImplementationGuide/hl7.fhir.us.carin-bb"
+      }]
+    }
+  }],
+  "url" : "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBInsuranceProductTypeCS",
+  "version" : "2.1.0-draft",
+  "name" : "C4BBInsuranceProductTypeCS",
+  "title" : "C4BB Insurance Product Type Code System",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2024-05-15T22:37:02-07:00",
+  "publisher" : "HL7 International / Financial Management",
+  "contact" : [{
+    "name" : "HL7 International / Financial Management",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "http://www.hl7.org/Special/committees/fm"
+    },
+    {
+      "system" : "email",
+      "value" : "fm@lists.HL7.org"
+    }]
+  }],
+  "description" : "Insurance Product Type Code System",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "US"
+    }]
+  }],
+  "copyright" : "This CodeSystem is not copyrighted.",
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 6,
+  "concept" : [{
+    "code" : "hmo",
+    "display" : "Commercial",
+    "definition" : "Commercial"
+  },
+  {
+    "code" : "ppo",
+    "display" : "Medicare",
+    "definition" : "Medicare"
+  },
+  {
+    "code" : "pos",
+    "display" : "Medicare POS",
+    "definition" : "Medicare Point-of-Service (POS)"
+  },
+  {
+    "code" : "epo",
+    "display" : "Exclusive Provider Organization",
+    "definition" : "Exclusive Provider Organization"
+  },
+  {
+    "code" : "work-comp",
+    "display" : "Worker's Comp",
+    "definition" : "Worker's Compensation"
+  },
+  {
+    "code" : "ffs",
+    "display" : "Fee for Service",
+    "definition" : "Fee for Service"
+  }]
+}
