@@ -11,7 +11,7 @@ This project is based on the [HAPI-FHIR JPA Server Starter Project](https://gith
 - Maven
 
 ### Build and Run
-
+A live demo is hosted by [HL7 FHIR Foundry](https://foundry.hl7.org/products/ed7f147c-b531-4e2e-9cc1-8352c16132e3), where you may also download curated configurations to run yourself.
 ```
 git clone https://github.com/HL7-DaVinci/pdex-server/
 cd pdex-server
