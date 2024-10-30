@@ -308,8 +308,12 @@ public class ProcessCustomizer {
 					}
 				}
 
-				
-				for (String filename : getServerResources("ri_resources", "ImplementationGuide-*.json")) {
+				/*
+				The below code is commented for reasons below.
+				1. The ImplementationGuide json resource is removed from ri_resources folder as this is impacting the patient $everything operation results due to example patients referenced in IG resource
+				2. The ImplementationGuide json is also likely outdated
+				*/
+				/*for (String filename : getServerResources("ri_resources", "ImplementationGuide-*.json")) {
 					try {
 						System.out.println("Uploading resource " + filename);
 						theDaoRegistry.getResourceDao(ImplementationGuide.class).update(
@@ -318,7 +322,7 @@ public class ProcessCustomizer {
 					} catch (Exception e) {
 						System.out.println("Failure to update the ImplementationGuide: " + e.getMessage());
 					}
-				}
+				}*/
 			}
 			// if overriding requirement rules, just skip
 
