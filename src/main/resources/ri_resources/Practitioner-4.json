@@ -7,7 +7,7 @@
   },
   "text" : {
     "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: Practitioner</b><a name=\"4\"> </a><a name=\"hc4\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Practitioner &quot;4&quot; Updated &quot;2020-07-12 18:26:23+0000&quot; </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"http://hl7.org/fhir/us/core/STU6.1-snapshot1/StructureDefinition-us-core-practitioner.html\">US Core Practitioner Profile</a></p></div><p><b>identifier</b>: National Provider Identifier/1982943213</p><p><b>name</b>: Susan Smith </p><p><b>telecom</b>: ph: 4102943213</p><p><b>gender</b>: female</p><p><b>birthDate</b>: 1965-11-15</p></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: Practitioner 4</b></p><a name=\"4\"> </a><a name=\"hc4\"> </a><a name=\"4-en-US\"> </a><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Last updated: 2020-07-12 18:26:23+0000</p><p style=\"margin-bottom: 0px\">Profile: <a href=\"http://hl7.org/fhir/us/core/STU7/StructureDefinition-us-core-practitioner.html\">US Core Practitioner Profile</a></p></div><p><b>identifier</b>: National Provider Identifier/1982943213</p><p><b>name</b>: Susan Smith </p><p><b>telecom</b>: ph: 4102943213</p><p><b>gender</b>: Female</p><p><b>birthDate</b>: 1965-11-15</p></div>"
   },
   "identifier" : [{
     "type" : {

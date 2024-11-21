@@ -3,7 +3,7 @@
   "id" : "C4BBTotalCategoryDiscriminator",
   "text" : {
     "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This value set includes codes based on the following rules:</p><ul><li>Import all the codes that are contained in <a href=\"ValueSet-C4BBAdjudication.html\">C4BB Adjudication Value Set</a></li><li>Import all the codes that are contained in <a href=\"ValueSet-C4BBPayerBenefitPaymentStatus.html\">C4BB Payer Benefit Payment Status Value Set</a></li></ul></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet C4BBTotalCategoryDiscriminator</b></p><a name=\"C4BBTotalCategoryDiscriminator\"> </a><a name=\"hcC4BBTotalCategoryDiscriminator\"> </a><a name=\"C4BBTotalCategoryDiscriminator-en-US\"> </a><ul><li>Import all the codes that are contained in <a href=\"ValueSet-C4BBAdjudication.html\">C4BB Adjudication Value Set</a></li></ul></div>"
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
@@ -20,12 +20,12 @@
     }
   }],
   "url" : "http://hl7.org/fhir/us/carin-bb/ValueSet/C4BBTotalCategoryDiscriminator",
-  "version" : "2.1.0-draft",
+  "version" : "2.1.0",
   "name" : "C4BBTotalCategoryDiscriminator",
   "title" : "C4BB Total Category Discriminator Value Set",
   "status" : "active",
   "experimental" : false,
-  "date" : "2024-05-15T22:37:02-07:00",
+  "date" : "2024-11-20T00:21:20+00:00",
   "publisher" : "HL7 International / Financial Management",
   "contact" : [{
     "name" : "HL7 International / Financial Management",
@@ -49,9 +49,6 @@
   "compose" : {
     "include" : [{
       "valueSet" : ["http://hl7.org/fhir/us/carin-bb/ValueSet/C4BBAdjudication"]
-    },
-    {
-      "valueSet" : ["http://hl7.org/fhir/us/carin-bb/ValueSet/C4BBPayerBenefitPaymentStatus"]
     }]
   }
 }

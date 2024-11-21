@@ -3,19 +3,29 @@
   "id" : "PDexAdjudicationDiscriminator",
   "text" : {
     "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This case-insensitive code system <code>http://hl7.org/fhir/us/davinci-pdex/CodeSystem/PDexAdjudicationDiscriminator</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">allowedunits<a name=\"PDexAdjudicationDiscriminator-allowedunits\"> </a></td><td>allowed units</td><td>defines the adjudication slice to define allowed units</td></tr><tr><td style=\"white-space:nowrap\">consumedunits<a name=\"PDexAdjudicationDiscriminator-consumedunits\"> </a></td><td>consumed units</td><td>defines the adjudication slice to define consumed units</td></tr><tr><td style=\"white-space:nowrap\">denialreason<a name=\"PDexAdjudicationDiscriminator-denialreason\"> </a></td><td>Denial Reason</td><td>defines the adjudication slice to identify the denial reason</td></tr></table></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem PDexAdjudicationDiscriminator</b></p><a name=\"PDexAdjudicationDiscriminator\"> </a><a name=\"hcPDexAdjudicationDiscriminator\"> </a><a name=\"PDexAdjudicationDiscriminator-en-US\"> </a><p>This case-insensitive code system <code>http://hl7.org/fhir/us/davinci-pdex/CodeSystem/PDexAdjudicationDiscriminator</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">allowedunits<a name=\"PDexAdjudicationDiscriminator-allowedunits\"> </a></td><td>allowed units</td><td>defines the adjudication slice to define allowed units</td></tr><tr><td style=\"white-space:nowrap\">consumedunits<a name=\"PDexAdjudicationDiscriminator-consumedunits\"> </a></td><td>consumed units</td><td>defines the adjudication slice to define consumed units</td></tr><tr><td style=\"white-space:nowrap\">denialreason<a name=\"PDexAdjudicationDiscriminator-denialreason\"> </a></td><td>Denial Reason</td><td>defines the adjudication slice to identify the denial reason</td></tr></table></div>"
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
     "valueCode" : "fm"
+  },
+  {
+    "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+    "valueCode" : "trial-use",
+    "_valueCode" : {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-conformance-derivedFrom",
+        "valueCanonical" : "http://hl7.org/fhir/us/davinci-pdex/ImplementationGuide/hl7.fhir.us.davinci-pdex"
+      }]
+    }
   }],
   "url" : "http://hl7.org/fhir/us/davinci-pdex/CodeSystem/PDexAdjudicationDiscriminator",
-  "version" : "2.1.0",
+  "version" : "2.1.1",
   "name" : "PDexAdjudicationDiscriminator",
   "title" : "PDex Adjudication Discriminator",
   "status" : "active",
   "experimental" : false,
-  "date" : "2024-05-02T13:59:36-07:00",
+  "date" : "2024-11-20T18:18:31+00:00",
   "publisher" : "HL7 International / Financial Management",
   "contact" : [{
     "name" : "HL7 International / Financial Management",

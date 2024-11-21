@@ -3,7 +3,7 @@
   "id" : "C4BBProfessionalAndNonClinicianClaimSubType",
   "text" : {
     "status" : "extensions",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><ul><li>Include these codes as defined in <a href=\"http://terminology.hl7.org/5.5.0/CodeSystem-claim-type.html\"><code>http://terminology.hl7.org/CodeSystem/claim-type</code></a><table class=\"none\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td><a href=\"http://terminology.hl7.org/5.5.0/CodeSystem-claim-type.html#claim-type-vision\">vision</a></td><td style=\"color: #cccccc\">Vision</td><td>Vision claims for professional services and products such as glasses and contact lenses.</td></tr></table></li></ul></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet C4BBProfessionalAndNonClinicianClaimSubType</b></p><a name=\"C4BBProfessionalAndNonClinicianClaimSubType\"> </a><a name=\"hcC4BBProfessionalAndNonClinicianClaimSubType\"> </a><a name=\"C4BBProfessionalAndNonClinicianClaimSubType-en-US\"> </a><ul><li>Include these codes as defined in <a href=\"http://terminology.hl7.org/6.1.0/CodeSystem-claim-type.html\"><code>http://terminology.hl7.org/CodeSystem/claim-type</code></a><table class=\"none\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td><a href=\"http://terminology.hl7.org/6.1.0/CodeSystem-claim-type.html#claim-type-vision\">vision</a></td><td style=\"color: #cccccc\">Vision</td><td>Vision claims for professional services and products such as glasses and contact lenses.</td></tr></table></li></ul></div>"
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
@@ -20,12 +20,12 @@
     }
   }],
   "url" : "http://hl7.org/fhir/us/carin-bb/ValueSet/C4BBProfessionalAndNonClinicianClaimSubType",
-  "version" : "2.1.0-draft",
+  "version" : "2.1.0",
   "name" : "C4BBProfessionalAndNonClinicianClaimSubType",
   "title" : "C4BB Professional And Non Clinician Claim SubType Value Set",
   "status" : "active",
   "experimental" : false,
-  "date" : "2024-05-15T22:37:02-07:00",
+  "date" : "2024-11-20T00:21:20+00:00",
   "publisher" : "HL7 International / Financial Management",
   "contact" : [{
     "name" : "HL7 International / Financial Management",

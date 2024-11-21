@@ -80,6 +80,25 @@
     },
     "display" : "Old Health Plan"
   },
+  "characteristic" : [{
+    "code" : {
+      "coding" : [{
+        "system" : "http://hl7.org/fhir/us/davinci-pdex/CodeSystem/PdexMultiMemberMatchResultCS",
+        "code" : "match",
+        "display" : "Matched"
+      }]
+    },
+    "valueReference" : {
+      "identifier" : {
+        "system" : "http://hl7.org/fhir/sid/us-npi",
+        "value" : "0123456789"
+      }
+    },
+    "exclude" : false,
+    "period" : {
+      "start" : "2024-03-20"
+    }
+  }],
   "member" : [{
     "entity" : {
       "extension" : [{

@@ -3,7 +3,7 @@
   "id" : "AHANUBCTypeOfBill",
   "text" : {
     "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><ul><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.0.0/CodeSystem-AHANUBCTypeOfBill.html\"><code>https://www.nubc.org/CodeSystem/TypeOfBill</code></a></li></ul></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet AHANUBCTypeOfBill</b></p><a name=\"AHANUBCTypeOfBill\"> </a><a name=\"hcAHANUBCTypeOfBill\"> </a><a name=\"AHANUBCTypeOfBill-en-US\"> </a><ul><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.0.0/CodeSystem-AHANUBCTypeOfBill.html\"><code>https://www.nubc.org/CodeSystem/TypeOfBill</code></a></li></ul></div>"
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
@@ -20,12 +20,12 @@
     }
   }],
   "url" : "http://hl7.org/fhir/us/carin-bb/ValueSet/AHANUBCTypeOfBill",
-  "version" : "2.1.0-draft",
+  "version" : "2.1.0",
   "name" : "AHANUBCTypeOfBill",
   "title" : "NUBC Type of Bill Codes Value Set",
   "status" : "active",
   "experimental" : false,
-  "date" : "2024-05-15T22:37:02-07:00",
+  "date" : "2024-11-20T00:21:20+00:00",
   "publisher" : "HL7 International / Financial Management",
   "contact" : [{
     "name" : "HL7 International / Financial Management",
@@ -45,7 +45,7 @@
       "code" : "US"
     }]
   }],
-  "copyright" : "Licensing information can be found [here](https://www.nubc.org/license).\r\n\r\nThese codes are listed within the UB-04 Data Specifications Manual. The Official UB-04 Data Specifications Manual, copyrighted by the American Hospital Association, is the only official source of UB-04 billing information adopted by the National Uniform Billing Committee. No other publication—governmental or private/commercial—can be considered authoritative. The AHA wants to make you aware that the use of codes, descriptions, or any other content contained in the manual to be used in a software application, publication, or any other derivative work must be properly licensed by the AHA. If your organization uses or intends to use any of the codes or other related content from the manual in this manner, please contact the AHA’s licensing manager, Tim Carlson, at 312.893.6816 or email tcarlson@aha.org",
+  "copyright" : "Licensing information can be found [here](https://www.nubc.org/license).\n\nThese codes are listed within the UB-04 Data Specifications Manual. The Official UB-04 Data Specifications Manual, copyrighted by the American Hospital Association, is the only official source of UB-04 billing information adopted by the National Uniform Billing Committee. No other publication—governmental or private/commercial—can be considered authoritative. The AHA wants to make you aware that the use of codes, descriptions, or any other content contained in the manual to be used in a software application, publication, or any other derivative work must be properly licensed by the AHA. If your organization uses or intends to use any of the codes or other related content from the manual in this manner, please contact the AHA’s licensing manager, Tim Carlson, at 312.893.6816 or email tcarlson@aha.org",
   "compose" : {
     "include" : [{
       "system" : "https://www.nubc.org/CodeSystem/TypeOfBill"

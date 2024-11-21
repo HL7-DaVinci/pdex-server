@@ -3,11 +3,11 @@
   "id" : "RelatedPerson1",
   "meta" : {
     "lastUpdated" : "2020-05-04T03:02:01-04:00",
-    "profile" : ["http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-RelatedPerson|2.0.0"]
+    "profile" : ["http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-RelatedPerson|2.1.0"]
   },
   "text" : {
     "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p><b>Generated Narrative: RelatedPerson</b><a name=\"RelatedPerson1\"> </a><a name=\"hcRelatedPerson1\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">ResourceRelatedPerson &quot;RelatedPerson1&quot; Updated &quot;2020-05-04 03:02:01-0400&quot; </p><p style=\"margin-bottom: 0px\">Profile: <code>http://hl7.org/fhir/us/carin-bb/StructureDefinition/C4BB-RelatedPerson|2.0.0</code></p></div><p><b>active</b>: true</p><p><b>patient</b>: <a href=\"Patient-Patient1.html\">Patient/Patient1</a> &quot; EXAMPLE1&quot;</p><p><b>relationship</b>: mother <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://terminology.hl7.org/5.5.0/CodeSystem-v3-RoleCode.html\">RoleCode</a>#MTH)</span></p><p><b>name</b>: Mary Example1 </p><p><b>telecom</b>: ph: (301)666-1212</p><p><b>address</b>: 123 Main Street Pittsburgh PA 12519 </p></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: RelatedPerson RelatedPerson1</b></p><a name=\"RelatedPerson1\"> </a><a name=\"hcRelatedPerson1\"> </a><a name=\"RelatedPerson1-en-US\"> </a><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Last updated: 2020-05-04 03:02:01-0400</p><p style=\"margin-bottom: 0px\">Profile: <a href=\"StructureDefinition-C4BB-RelatedPerson.html\">C4BB RelatedPersonversion: null2.1.0)</a></p></div><p><b>active</b>: true</p><p><b>patient</b>: <a href=\"Patient-Patient1.html\">Johnny Example1  Male, DoB: 1986-01-01 ( Member Number)</a></p><p><b>relationship</b>: <span title=\"Codes:{http://terminology.hl7.org/CodeSystem/v3-RoleCode MTH}\">mother</span></p><p><b>name</b>: Mary Example1 </p><p><b>telecom</b>: ph: (301)666-1212</p><p><b>address</b>: 123 Main Street Pittsburgh PA 12519 </p></div>"
   },
   "active" : true,
   "patient" : {

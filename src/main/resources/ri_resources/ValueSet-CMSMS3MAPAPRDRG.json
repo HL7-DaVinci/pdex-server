@@ -3,7 +3,7 @@
   "id" : "CMSMS3MAPAPRDRG",
   "text" : {
     "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This value set includes codes based on the following rules:</p><ul><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.0.0/CodeSystem-MSDRG.html\"><code>https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/AcuteInpatientPPS/MS-DRG-Classifications-and-Software</code></a></li><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.0.0/CodeSystem-APDRG.html\"><code>http://uri.hddaccess.com/cs/apdrg</code></a></li><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.0.0/CodeSystem-APRDRG.html\"><code>http://uri.hddaccess.com/cs/aprdrg</code></a></li></ul></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet CMSMS3MAPAPRDRG</b></p><a name=\"CMSMS3MAPAPRDRG\"> </a><a name=\"hcCMSMS3MAPAPRDRG\"> </a><a name=\"CMSMS3MAPAPRDRG-en-US\"> </a><p>This value set includes codes based on the following rules:</p><ul><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.0.0/CodeSystem-MSDRG.html\"><code>https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/AcuteInpatientPPS/MS-DRG-Classifications-and-Software</code></a></li><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.0.0/CodeSystem-APDRG.html\"><code>http://uri.hddaccess.com/cs/apdrg</code></a></li><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.0.0/CodeSystem-APRDRG.html\"><code>http://uri.hddaccess.com/cs/aprdrg</code></a></li></ul></div>"
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
@@ -20,12 +20,12 @@
     }
   }],
   "url" : "http://hl7.org/fhir/us/carin-bb/ValueSet/CMSMS3MAPAPRDRG",
-  "version" : "2.1.0-draft",
+  "version" : "2.1.0",
   "name" : "CMSMS3MAPAPRDRG",
   "title" : "MS-DRGs - AP-DRGs - APR-DRGs Value Set",
   "status" : "active",
   "experimental" : false,
-  "date" : "2024-05-15T22:37:02-07:00",
+  "date" : "2024-11-20T00:21:20+00:00",
   "publisher" : "HL7 International / Financial Management",
   "contact" : [{
     "name" : "HL7 International / Financial Management",
@@ -45,7 +45,7 @@
       "code" : "US"
     }]
   }],
-  "copyright" : "The Centers for Medicare & Medicaid Services (CMS) maintain MS-DRGs used throughout the US health care industry. The CMS MS-DRGs are free to use without restriction.\r\n\r\nThe clinical logic is maintained by a team of 3M clinicians, data analysts, nosologists, programmers and economists. The logic is proprietary to 3M but is available for licensees to view in an online definitions manual.\r\n\r\nTo license APR DRG from 3M, see request form [here](https://engage.3m.com/PPS_Groupers_Contact)",
+  "copyright" : "The Centers for Medicare & Medicaid Services (CMS) maintain MS-DRGs used throughout the US health care industry. The CMS MS-DRGs are free to use without restriction.\n\nThe clinical logic is maintained by a team of 3M clinicians, data analysts, nosologists, programmers and economists. The logic is proprietary to 3M but is available for licensees to view in an online definitions manual.\n\nTo license APR DRG from 3M, see request form [here](https://engage.3m.com/PPS_Groupers_Contact)",
   "compose" : {
     "include" : [{
       "system" : "https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/AcuteInpatientPPS/MS-DRG-Classifications-and-Software"

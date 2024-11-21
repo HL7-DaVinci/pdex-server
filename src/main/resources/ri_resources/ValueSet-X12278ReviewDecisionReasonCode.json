@@ -3,19 +3,29 @@
   "id" : "X12278ReviewDecisionReasonCode",
   "text" : {
     "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><ul><li>Include all codes defined in <code>https://codesystem.x12.org/external/886</code></li></ul></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet X12278ReviewDecisionReasonCode</b></p><a name=\"X12278ReviewDecisionReasonCode\"> </a><a name=\"hcX12278ReviewDecisionReasonCode\"> </a><a name=\"X12278ReviewDecisionReasonCode-en-US\"> </a><ul><li>Include all codes defined in <code>https://codesystem.x12.org/external/886</code></li></ul></div>"
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
     "valueCode" : "fm"
+  },
+  {
+    "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+    "valueCode" : "informative",
+    "_valueCode" : {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-conformance-derivedFrom",
+        "valueCanonical" : "http://hl7.org/fhir/us/davinci-pdex/ImplementationGuide/hl7.fhir.us.davinci-pdex"
+      }]
+    }
   }],
   "url" : "http://hl7.org/fhir/us/davinci-pdex/ValueSet/X12278ReviewDecisionReasonCode",
-  "version" : "2.1.0",
+  "version" : "2.1.1",
   "name" : "X12278ReviewDecisionReasonCode",
   "title" : "X12 278 Review Decision Reason Codes",
   "status" : "active",
   "experimental" : true,
-  "date" : "2024-05-02T13:59:36-07:00",
+  "date" : "2024-11-20T18:18:31+00:00",
   "publisher" : "HL7 International / Financial Management",
   "contact" : [{
     "name" : "HL7 International / Financial Management",
