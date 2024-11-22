@@ -3,19 +3,29 @@
   "id" : "PDexPAInstitutionalProcedureCodes",
   "text" : {
     "status" : "extensions",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This value set includes codes based on the following rules:</p><ul><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.5.0/CodeSystem-CPT.html\"><code>http://www.ama-assn.org/go/cpt</code></a></li><li>Include all codes defined in <a href=\"http://terminology.hl7.org/4.0.0/CodeSystem-hcpcs-Level-II.html\"><code>https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets</code></a></li><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.5.0/CodeSystem-HIPPS.html\"><code>https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/ProspMedicareFeeSvcPmtGen/HIPPSCodes</code></a></li><li>Include these codes as defined in <a href=\"http://terminology.hl7.org/5.5.0/CodeSystem-data-absent-reason.html\"><code>http://terminology.hl7.org/CodeSystem/data-absent-reason</code></a><table class=\"none\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td><a href=\"http://terminology.hl7.org/5.5.0/CodeSystem-data-absent-reason.html#data-absent-reason-not-applicable\">not-applicable</a></td><td>Not Applicable</td><td>There is no proper value for this element (e.g. last menstrual period for a male).</td></tr></table></li></ul></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet PDexPAInstitutionalProcedureCodes</b></p><a name=\"PDexPAInstitutionalProcedureCodes\"> </a><a name=\"hcPDexPAInstitutionalProcedureCodes\"> </a><a name=\"PDexPAInstitutionalProcedureCodes-en-US\"> </a><p>This value set includes codes based on the following rules:</p><ul><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.3.0/CodeSystem-CPT.html\"><code>http://www.ama-assn.org/go/cpt</code></a></li><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.3.0/CodeSystem-hcpcs-Level-II.html\"><code>https://www.cms.gov/Medicare/Coding/HCPCSReleaseCodeSets</code></a></li><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.3.0/CodeSystem-HIPPS.html\"><code>https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/ProspMedicareFeeSvcPmtGen/HIPPSCodes</code></a></li><li>Include these codes as defined in <a href=\"http://terminology.hl7.org/6.1.0/CodeSystem-data-absent-reason.html\"><code>http://terminology.hl7.org/CodeSystem/data-absent-reason</code></a><table class=\"none\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td><a href=\"http://terminology.hl7.org/6.1.0/CodeSystem-data-absent-reason.html#data-absent-reason-not-applicable\">not-applicable</a></td><td>Not Applicable</td><td>There is no proper value for this element (e.g. last menstrual period for a male).</td></tr></table></li></ul></div>"
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
     "valueCode" : "fm"
+  },
+  {
+    "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+    "valueCode" : "trial-use",
+    "_valueCode" : {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-conformance-derivedFrom",
+        "valueCanonical" : "http://hl7.org/fhir/us/davinci-pdex/ImplementationGuide/hl7.fhir.us.davinci-pdex"
+      }]
+    }
   }],
   "url" : "http://hl7.org/fhir/us/davinci-pdex/ValueSet/PDexPAInstitutionalProcedureCodes",
-  "version" : "2.1.0",
+  "version" : "2.1.1",
   "name" : "PDexPAInstitutionalProcedureCodes",
   "title" : "Procedure Codes - AMA CPT - CMS HCPCS - CMS HIPPS",
   "status" : "active",
   "experimental" : false,
-  "date" : "2024-05-02T13:59:36-07:00",
+  "date" : "2024-11-20T18:18:31+00:00",
   "publisher" : "HL7 International / Financial Management",
   "contact" : [{
     "name" : "HL7 International / Financial Management",
@@ -50,7 +60,7 @@
       "display" : "United States of America"
     }]
   }],
-  "copyright" : "Current Procedural Terminology (CPT) is copyright 2020 American Medical Association. All rights reserved\r\nSee information on the use of HCPCS Level I (proprietary and owned by American Medical Association) and Level II codes [here](https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/HCPCS_Coding_Questions)\r\nCMS maintains HIPPS. There are no known constraints on the use of HIPPS. See more information about HIPPS codes [here](https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/ProspMedicareFeeSvcPmtGen/HIPPSCodes)",
+  "copyright" : "Current Procedural Terminology (CPT) is copyright 2020 American Medical Association. All rights reserved\nSee information on the use of HCPCS Level I (proprietary and owned by American Medical Association) and Level II codes [here](https://www.cms.gov/Medicare/Coding/MedHCPCSGenInfo/HCPCS_Coding_Questions)\nCMS maintains HIPPS. There are no known constraints on the use of HIPPS. See more information about HIPPS codes [here](https://www.cms.gov/Medicare/Medicare-Fee-for-Service-Payment/ProspMedicareFeeSvcPmtGen/HIPPSCodes)",
   "compose" : {
     "include" : [{
       "system" : "http://www.ama-assn.org/go/cpt"

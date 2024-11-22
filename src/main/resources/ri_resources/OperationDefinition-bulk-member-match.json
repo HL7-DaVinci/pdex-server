@@ -2,20 +2,30 @@
   "resourceType" : "OperationDefinition",
   "id" : "bulk-member-match",
   "text" : {
-    "status" : "extensions",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>URL: [base]/Group/$bulk-member-match</p><p>Input parameters Profile: <a href=\"StructureDefinition-pdex-parameters-multi-member-match-bundle-in.html\">PDex $multi-member-match request</a></p><p>Output parameters Profile: <a href=\"StructureDefinition-pdex-parameters-multi-member-match-bundle-out.html\">PDex $multi-member-match response</a></p><p>Parameters</p><table class=\"grid\"><tr><td><b>Use</b></td><td><b>Name</b></td><td><b>Scope</b></td><td><b>Cardinality</b></td><td><b>Type</b></td><td><b>Binding</b></td><td><b>Documentation</b></td></tr><tr><td>IN</td><td>MatchRequest</td><td/><td>1..1</td><td><a href=\"http://hl7.org/fhir/R4/references.html#Reference\">Reference</a> (<a href=\"StructureDefinition-pdex-parameters-multi-member-match-bundle-in.html\" title=\"http://hl7.org/fhir/us/davinci-pdex/StructureDefinition/pdex-parameters-multi-member-match-bundle-in\">PDex $multi-member-match request</a>)</td><td/><td><div><p>Bundle of Member information. Repeat bundle for each member to be submitted to bulk member-match, as defined in PDex $multi-member-match request.</p>\n</div></td></tr><tr><td>OUT</td><td>MatchResponse</td><td/><td>1..1</td><td><a href=\"http://hl7.org/fhir/R4/references.html#Reference\">Reference</a> (<a href=\"StructureDefinition-pdex-parameters-multi-member-match-bundle-out.html\" title=\"http://hl7.org/fhir/us/davinci-pdex/StructureDefinition/pdex-parameters-multi-member-match-bundle-out\">PDex $multi-member-match response</a>)</td><td/><td><div><p>Bundle of Groups returned from Member Match Operation. There can be up to three (3) groups: Matched, Not-Matched and ConsentConstrained.</p>\n</div></td></tr></table></div>"
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: OperationDefinition bulk-member-match</b></p><a name=\"bulk-member-match\"> </a><a name=\"hcbulk-member-match\"> </a><a name=\"bulk-member-match-en-US\"> </a><p>URL: [base]/Group/$bulk-member-match</p><p>Input parameters Profile:<a href=\"StructureDefinition-pdex-parameters-multi-member-match-bundle-in.html\">PDex $multi-member-match request</a></p><p>Output parameters Profile:<a href=\"StructureDefinition-pdex-parameters-multi-member-match-bundle-out.html\">PDex $multi-member-match response</a></p><h3>Parameters</h3><table class=\"grid\"><tr><td><b>Use</b></td><td><b>Name</b></td><td><b>Scope</b></td><td><b>Cardinality</b></td><td><b>Type</b></td><td><b>Binding</b></td><td><b>Documentation</b></td></tr><tr><td>IN</td><td>MatchRequest</td><td/><td>1..1</td><td><a href=\"http://hl7.org/fhir/R4/references.html#Reference\">Reference</a> (<a href=\"StructureDefinition-pdex-parameters-multi-member-match-bundle-in.html\" title=\"http://hl7.org/fhir/us/davinci-pdex/StructureDefinition/pdex-parameters-multi-member-match-bundle-in\">PDex $multi-member-match request</a>)</td><td/><td><div><p>Bundle of Member information. Repeat bundle for each member to be submitted to bulk member-match, as defined in PDex $multi-member-match request.</p>\n</div></td></tr><tr><td>OUT</td><td>MatchResponse</td><td/><td>1..1</td><td><a href=\"http://hl7.org/fhir/R4/references.html#Reference\">Reference</a> (<a href=\"StructureDefinition-pdex-parameters-multi-member-match-bundle-out.html\" title=\"http://hl7.org/fhir/us/davinci-pdex/StructureDefinition/pdex-parameters-multi-member-match-bundle-out\">PDex $multi-member-match response</a>)</td><td/><td><div><p>Bundle of Groups returned from Member Match Operation. There can be up to three (3) groups: Matched, Not-Matched and ConsentConstrained.</p>\n</div></td></tr></table></div>"
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
     "valueCode" : "fm"
+  },
+  {
+    "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+    "valueCode" : "trial-use",
+    "_valueCode" : {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-conformance-derivedFrom",
+        "valueCanonical" : "http://hl7.org/fhir/us/davinci-pdex/ImplementationGuide/hl7.fhir.us.davinci-pdex"
+      }]
+    }
   }],
   "url" : "http://hl7.org/fhir/us/davinci-pdex/OperationDefinition/bulk-member-match",
-  "version" : "2.1.0",
+  "version" : "2.1.1",
   "name" : "BulkMemberMatch",
   "title" : "PDex Bulk Member Match Operation",
-  "status" : "draft",
+  "status" : "active",
   "kind" : "operation",
-  "date" : "2024-05-02T13:59:36-07:00",
+  "date" : "2024-11-20T18:18:31+00:00",
   "publisher" : "HL7 International / Financial Management",
   "contact" : [{
     "name" : "HL7 International / Financial Management",

@@ -3,19 +3,29 @@
   "id" : "MtlsObjectCodeCS",
   "text" : {
     "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This case-insensitive code system <code>http://hl7.org/fhir/us/davinci-pdex/CodeSystem/MtlsObjectCodeCS</code> defines the following code:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td></tr><tr><td style=\"white-space:nowrap\">MTLS<a name=\"MtlsObjectCodeCS-MTLS\"> </a></td><td>mTLS signed Object</td></tr></table></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem MtlsObjectCodeCS</b></p><a name=\"MtlsObjectCodeCS\"> </a><a name=\"hcMtlsObjectCodeCS\"> </a><a name=\"MtlsObjectCodeCS-en-US\"> </a><p>This case-insensitive code system <code>http://hl7.org/fhir/us/davinci-pdex/CodeSystem/MtlsObjectCodeCS</code> defines the following code:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td></tr><tr><td style=\"white-space:nowrap\">MTLS<a name=\"MtlsObjectCodeCS-MTLS\"> </a></td><td>mTLS signed Object</td></tr></table></div>"
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
     "valueCode" : "fm"
+  },
+  {
+    "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+    "valueCode" : "trial-use",
+    "_valueCode" : {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-conformance-derivedFrom",
+        "valueCanonical" : "http://hl7.org/fhir/us/davinci-pdex/ImplementationGuide/hl7.fhir.us.davinci-pdex"
+      }]
+    }
   }],
   "url" : "http://hl7.org/fhir/us/davinci-pdex/CodeSystem/MtlsObjectCodeCS",
-  "version" : "2.1.0",
+  "version" : "2.1.1",
   "name" : "MtlsObjectCodeCS",
   "title" : "mTLS Object Type Code",
   "status" : "active",
   "experimental" : false,
-  "date" : "2024-05-02T13:59:36-07:00",
+  "date" : "2024-11-20T18:18:31+00:00",
   "publisher" : "HL7 International / Financial Management",
   "contact" : [{
     "name" : "HL7 International / Financial Management",
@@ -50,6 +60,7 @@
       "display" : "United States of America"
     }]
   }],
+  "copyright" : "Used by permission of HL7 International, all rights reserved Creative Commons License",
   "caseSensitive" : false,
   "content" : "complete",
   "count" : 1,

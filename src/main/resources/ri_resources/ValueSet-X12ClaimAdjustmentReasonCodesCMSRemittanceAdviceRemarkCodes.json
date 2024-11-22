@@ -3,19 +3,29 @@
   "id" : "X12ClaimAdjustmentReasonCodesCMSRemittanceAdviceRemarkCodes",
   "text" : {
     "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p>This value set includes codes based on the following rules:</p><ul><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.5.0/CodeSystem-X12ClaimAdjustmentReasonCodes.html\"><code>https://x12.org/codes/claim-adjustment-reason-codes</code></a></li><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.5.0/CodeSystem-RARC.html\"><code>https://x12.org/codes/remittance-advice-remark-codes</code></a></li></ul></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet X12ClaimAdjustmentReasonCodesCMSRemittanceAdviceRemarkCodes</b></p><a name=\"X12ClaimAdjustmentReasonCodesCMSRemittanceAdviceRemarkCodes\"> </a><a name=\"hcX12ClaimAdjustmentReasonCodesCMSRemittanceAdviceRemarkCodes\"> </a><a name=\"X12ClaimAdjustmentReasonCodesCMSRemittanceAdviceRemarkCodes-en-US\"> </a><p>This value set includes codes based on the following rules:</p><ul><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.3.0/CodeSystem-X12ClaimAdjustmentReasonCodes.html\"><code>https://x12.org/codes/claim-adjustment-reason-codes</code></a></li><li>Include all codes defined in <a href=\"http://terminology.hl7.org/5.3.0/CodeSystem-RARC.html\"><code>https://x12.org/codes/remittance-advice-remark-codes</code></a></li></ul></div>"
   },
   "extension" : [{
     "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-wg",
     "valueCode" : "fm"
+  },
+  {
+    "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-standards-status",
+    "valueCode" : "trial-use",
+    "_valueCode" : {
+      "extension" : [{
+        "url" : "http://hl7.org/fhir/StructureDefinition/structuredefinition-conformance-derivedFrom",
+        "valueCanonical" : "http://hl7.org/fhir/us/davinci-pdex/ImplementationGuide/hl7.fhir.us.davinci-pdex"
+      }]
+    }
   }],
   "url" : "http://hl7.org/fhir/us/davinci-pdex/ValueSet/X12ClaimAdjustmentReasonCodesCMSRemittanceAdviceRemarkCodes",
-  "version" : "2.1.0",
+  "version" : "2.1.1",
   "name" : "X12ClaimAdjustmentReasonCodesCMSRemittanceAdviceRemarkCodes",
   "title" : "X12 Claim Adjustment Reason Codes - Remittance Advice Remark Codes",
   "status" : "active",
   "experimental" : false,
-  "date" : "2024-05-02T13:59:36-07:00",
+  "date" : "2024-11-20T18:18:31+00:00",
   "publisher" : "HL7 International / Financial Management",
   "contact" : [{
     "name" : "HL7 International / Financial Management",

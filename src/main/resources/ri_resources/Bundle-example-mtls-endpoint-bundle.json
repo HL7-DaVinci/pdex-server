@@ -18,7 +18,7 @@
       "id" : "DiamondOnyxHealth2",
       "text" : {
         "status" : "generated",
-        "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"Organization_DiamondOnyxHealth2\"> </a><p><b>Generated Narrative: Organization</b><a name=\"DiamondOnyxHealth2\"> </a><a name=\"hcDiamondOnyxHealth2\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Organization &quot;DiamondOnyxHealth2&quot; </p></div><p><b>identifier</b>: DiamondOnyxHealth2</p></div>"
+        "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"Organization_DiamondOnyxHealth2\"> </a><p class=\"res-header-id\"><b>Generated Narrative: Organization DiamondOnyxHealth2</b></p><a name=\"DiamondOnyxHealth2\"> </a><a name=\"hcDiamondOnyxHealth2\"> </a><a name=\"DiamondOnyxHealth2-en-US\"> </a><p><b>identifier</b>: DiamondOnyxHealth2</p></div>"
       },
       "identifier" : [{
         "value" : "DiamondOnyxHealth2"
@@ -32,7 +32,7 @@
       "id" : "Diamond-mtls-endpoint2",
       "text" : {
         "status" : "generated",
-        "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"Endpoint_Diamond-mtls-endpoint2\"> </a><p><b>Generated Narrative: Endpoint</b><a name=\"Diamond-mtls-endpoint2\"> </a><a name=\"hcDiamond-mtls-endpoint2\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Endpoint &quot;Diamond-mtls-endpoint2&quot; </p></div><p><b>identifier</b>: Diamond-mtls-endpoint2</p><p><b>status</b>: active</p><p><b>connectionType</b>: HL7 FHIR (Details: http://terminology.hl7.org/CodeSystem/endpoint-connection-type code hl7-fhir-rest = 'HL7 FHIR', stated as 'HL7 FHIR')</p><p><b>name</b>: Payer-Payer Exchange</p><p><b>managingOrganization</b>: <a href=\"Organization-DiamondOnyxHealth1.html\">Organization/DiamondOnyxHealth1</a> &quot;DiamondOnyxHealth&quot;</p><p><b>payloadType</b>: Not Applicable <span style=\"background: LightGoldenRodYellow; margin: 4px; border: 1px solid khaki\"> (<a href=\"http://hl7.org/fhir/us/ndh/2023Sep/CodeSystem-EndpointPayloadTypeCS.html\">Endpoint Payload Types Code System</a>#NA)</span></p><p><b>address</b>: <a href=\"https://mtls-dev-dmdh.safhir.io/mtlsendpoint\">https://mtls-dev-dmdh.safhir.io/mtlsendpoint</a></p></div>"
+        "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"Endpoint_Diamond-mtls-endpoint2\"> </a><p class=\"res-header-id\"><b>Generated Narrative: Endpoint Diamond-mtls-endpoint2</b></p><a name=\"Diamond-mtls-endpoint2\"> </a><a name=\"hcDiamond-mtls-endpoint2\"> </a><a name=\"Diamond-mtls-endpoint2-en-US\"> </a><p><b>identifier</b>: Diamond-mtls-endpoint2</p><p><b>status</b>: Active</p><p><b>connectionType</b>: <a href=\"http://terminology.hl7.org/6.1.0/CodeSystem-endpoint-connection-type.html#endpoint-connection-type-hl7-fhir-rest\">Endpoint Connection Type hl7-fhir-rest</a>: HL7 FHIR</p><p><b>name</b>: Payer-Payer Exchange</p><p><b>managingOrganization</b>: <a href=\"Organization-DiamondOnyxHealth1.html\">Organization DiamondOnyxHealth</a></p><p><b>payloadType</b>: <span title=\"Codes:{http://hl7.org/fhir/us/ndh/CodeSystem/EndpointPayloadTypeCS NA}\">Not Applicable</span></p><p><b>address</b>: <a href=\"https://simplifier.net/resolve?scope=hl7.fhir.us.core.3.1.1@3.1.1&amp;canonical=https://mtls-dev-dmdh.safhir.io/mtlsendpoint\">https://mtls-dev-dmdh.safhir.io/mtlsendpoint</a></p></div>"
       },
       "identifier" : [{
         "value" : "Diamond-mtls-endpoint2"
@@ -64,7 +64,7 @@
       "id" : "DiamondOnyxHealth3",
       "text" : {
         "status" : "generated",
-        "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"Organization_DiamondOnyxHealth3\"> </a><p><b>Generated Narrative: Organization</b><a name=\"DiamondOnyxHealth3\"> </a><a name=\"hcDiamondOnyxHealth3\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Organization &quot;DiamondOnyxHealth3&quot; </p></div><p><b>identifier</b>: DiamondOnyxHealth3</p></div>"
+        "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><a name=\"Organization_DiamondOnyxHealth3\"> </a><p class=\"res-header-id\"><b>Generated Narrative: Organization DiamondOnyxHealth3</b></p><a name=\"DiamondOnyxHealth3\"> </a><a name=\"hcDiamondOnyxHealth3\"> </a><a name=\"DiamondOnyxHealth3-en-US\"> </a><p><b>identifier</b>: DiamondOnyxHealth3</p></div>"
       },
       "identifier" : [{
         "value" : "DiamondOnyxHealth3"

@@ -8,7 +8,7 @@
   "language" : "en-US",
   "text" : {
     "status" : "generated",
-    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en-US\" lang=\"en-US\"><p><b>Generated Narrative: Organization</b><a name=\"Payer1\"> </a><a name=\"hcPayer1\"> </a></p><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Resource Organization &quot;Payer1&quot; Updated &quot;2019-12-12 09:14:11+0000&quot;  (Language &quot;en-US&quot;) </p><p style=\"margin-bottom: 0px\">Profile: <a href=\"http://hl7.org/fhir/us/core/STU6.1-snapshot1/StructureDefinition-us-core-organization.html\">US Core Organization Profile</a></p></div><p><b>identifier</b>: National Provider Identifier/1022248102</p><p><b>active</b>: true</p><p><b>name</b>: Payer 1</p></div>"
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\" xml:lang=\"en-US\" lang=\"en-US\"><p class=\"res-header-id\"><b>Generated Narrative: Organization Payer1</b></p><a name=\"Payer1\"> </a><a name=\"hcPayer1\"> </a><a name=\"Payer1-en-US\"> </a><div style=\"display: inline-block; background-color: #d9e0e7; padding: 6px; margin: 4px; border: 1px solid #8da1b4; border-radius: 5px; line-height: 60%\"><p style=\"margin-bottom: 0px\">Last updated: 2019-12-12 09:14:11+0000; Language: en-US</p><p style=\"margin-bottom: 0px\">Profile: <a href=\"http://hl7.org/fhir/us/core/STU7/StructureDefinition-us-core-organization.html\">US Core Organization Profile</a></p></div><p><b>identifier</b>: National Provider Identifier/1022248102</p><p><b>active</b>: true</p><p><b>name</b>: Payer 1</p></div>"
   },
   "identifier" : [{
     "type" : {
