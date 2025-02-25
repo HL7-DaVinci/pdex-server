@@ -1,6 +1,7 @@
 package com.lantanagroup.pdex.export;
 
 import java.io.IOException;
+import java.time.ZoneId;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
@@ -8,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.instance.model.api.IBaseOperationOutcome;
@@ -19,8 +20,7 @@ import org.hl7.fhir.r4.model.Group;
 import org.hl7.fhir.r4.model.IdType;
 import org.hl7.fhir.r4.model.InstantType;
 import org.hl7.fhir.r4.model.Parameters;
-import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
+import java.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ca.uhn.fhir.batch2.api.IJobCoordinator;
@@ -67,11 +67,14 @@ public class DavinciDataExportProvider {
   private FhirContext ctx;
   private DaoRegistry daoRegistry;
   private IJobCoordinator jobCoordinator;
+  private BulkDataExportProvider bulkDataExportProvider;
 
-  public DavinciDataExportProvider(FhirContext ctx, DaoRegistry daoRegistry, IJobCoordinator jobCoordinator) {
+  public DavinciDataExportProvider(FhirContext ctx, DaoRegistry daoRegistry, IJobCoordinator jobCoordinator, BulkDataExportProvider bulkDataExportProvider) {
     this.ctx = ctx;
     this.daoRegistry = daoRegistry;
     this.jobCoordinator = jobCoordinator;
+    this.bulkDataExportProvider = bulkDataExportProvider;
+
   }
 
   @Operation(name = OPERATION_DAVINCI_DATA_EXPORT, type = Group.class, idempotent = true, manualResponse = true)
@@ -139,8 +142,8 @@ public class DavinciDataExportProvider {
 
     // _since parameter may need changed or just set to a default value based on the
     // export type
-    Date fiveYearsAgo = LocalDate.now(DateTimeZone.UTC).minusYears(5).toDate();
-    Date januaryFirstStart = LocalDate.parse("2016-01-01").toDate();
+    Date fiveYearsAgo = Date.from(LocalDate.now(ZoneId.of("UTC")).minusYears(5).atStartOfDay(ZoneId.of("UTC")).toInstant());
+    Date januaryFirstStart = Date.from(LocalDate.parse("2016-01-01").atStartOfDay(ZoneId.of("UTC")).toInstant());
     Date since = null;
     if (theSince != null) {
       since = theSince.getValue();
@@ -316,6 +319,8 @@ public class DavinciDataExportProvider {
             bulkResponseDocument.setRequest(results.getOriginalRequestUrl());
 
             String serverBase = StringUtils.removeEnd(theRequestDetails.getServerBaseForRequest(), "/");
+            // an output is required, even if empty, according to HL7 FHIR IG
+            //bulkResponseDocument.getOutput();
 
             for (Map.Entry<String, List<String>> entrySet : results.getResourceTypeToBinaryIds().entrySet()) {
               String resourceType = entrySet.getKey();

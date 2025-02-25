@@ -9,7 +9,7 @@ public class PdexCdsHooksRequest extends CdsServiceRequestJson {
 	@JsonProperty(value = "extension", required = true)
 	Object myExtension;
 	
-	public String getExtension() {
+	public String Extension() {
 		return myExtension.toString();
 	}
 

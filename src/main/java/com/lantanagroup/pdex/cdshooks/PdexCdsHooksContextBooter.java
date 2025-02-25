@@ -3,6 +3,7 @@ package com.lantanagroup.pdex.cdshooks;
 
 import java.lang.reflect.Method;
 
+import ca.uhn.hapi.fhir.cdshooks.api.json.CdsHooksExtension;
 import ca.uhn.hapi.fhir.cdshooks.svc.CdsHooksContextBooter;
 import ca.uhn.hapi.fhir.cdshooks.svc.CdsServiceCache;
 import ca.uhn.fhir.context.ConfigurationException;
@@ -85,14 +86,13 @@ public class PdexCdsHooksContextBooter extends CdsHooksContextBooter {
 		}
 	}
 
-	String myValidateJson(String theExtension) {
+	CdsHooksExtension myValidateJson(String theExtension) {
 		if (StringUtils.isEmpty(theExtension)) {
 			return null;
 		}
 		try {
 			final ObjectMapper mapper = new ObjectMapper();
-			mapper.readTree(theExtension);
-			return theExtension;
+			return mapper.readValue(theExtension, CdsHooksExtension.class);
 		} catch (JsonProcessingException e) {
 			final String message = String.format("Invalid JSON: %s", e.getMessage());
 			ourLog.debug(message);

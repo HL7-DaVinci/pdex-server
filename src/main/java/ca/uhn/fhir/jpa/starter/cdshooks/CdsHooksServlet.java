@@ -21,10 +21,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.io.IOException;
 import java.util.stream.Collectors;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import static ca.uhn.hapi.fhir.cdshooks.config.CdsHooksConfig.CDS_HOOKS_OBJECT_MAPPER_FACTORY;
 
@@ -98,9 +98,9 @@ public class CdsHooksServlet extends HttpServlet {
 			// CdsHooksRequest cdsHooksRequest = objectMapper.readValue(requestJson, CdsHooksRequest.class);
 			PdexCdsHooksRequest cdsHooksRequest = objectMapper.readValue(requestJson, PdexCdsHooksRequest.class);
 			logRequestInfo(cdsHooksRequest, requestJson);
-			
+
 			logger.info("Available services: " + cdsServiceRegistry.getCdsServicesJson());
-			
+
 			CdsServiceResponseJson serviceResponseJson = cdsServiceRegistry.callService(service, cdsHooksRequest);
 
 			// Using GSON pretty print format as Jackson's is ugly

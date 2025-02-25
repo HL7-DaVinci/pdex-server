@@ -17,7 +17,7 @@ env:
 jobs:
   build:
     name: Build
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     steps:
       - name: Container meta for default (distroless) image
         id: docker_meta
@@ -25,7 +25,7 @@ jobs:
         with:
           images: ${{ env.IMAGES }}
           tags: |
-            type=match,pattern=image-(.*),group=1,enable=${{github.event_name != 'pull_request'}}
+            type=match,pattern=image/(.*),group=1,enable=${{github.event_name != 'pull_request'}}
            
 
       - name: Container meta for tomcat image
@@ -34,7 +34,7 @@ jobs:
         with:
           images: ${{ env.IMAGES }}
           tags: |
-            type=match,pattern=image-(.*),group=1,enable=${{github.event_name != 'pull_request'}}
+            type=match,pattern=image/(.*),group=1,enable=${{github.event_name != 'pull_request'}}
           flavor: |
             suffix=-tomcat,onlatest=true
 
