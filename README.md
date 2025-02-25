@@ -7,7 +7,7 @@ This project is based on the [HAPI-FHIR JPA Server Starter Project](https://gith
 
 ### Requirements
 
-- Java 11+
+- Java 17+
 - Maven
 
 ### Build and Run
@@ -15,7 +15,7 @@ A live demo is hosted by [HL7 FHIR Foundry](https://foundry.hl7.org/products/ed7
 ```
 git clone https://github.com/HL7-DaVinci/pdex-server/
 cd pdex-server
-mvn -Pjetty jetty:run
+mvn -Pjetty spring-boot:run
 ```
 
 ## Security
@@ -95,7 +95,7 @@ configs:
      file: ./hapi.application.yaml
 ```
 
-Provide the following content in ``./hapi.aplication.yaml``:
+Provide the following content in ``./hapi.application.yaml``:
 
 ```yaml
 spring:
@@ -106,7 +106,7 @@ spring:
     driverClassName: org.postgresql.Driver
   jpa:
     properties:
-      hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgres94Dialect
+      hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgresDialect
       hibernate.search.enabled: false
 ```
 
@@ -148,7 +148,7 @@ configs:
      file: ./hapi-extra-classes
 ```
 
-Provide the following content in ``./hapi.aplication.yaml``:
+Provide the following content in ``./hapi.application.yaml``:
 
 ```yaml
 spring:
@@ -159,7 +159,7 @@ spring:
     driverClassName: org.postgresql.Driver
   jpa:
     properties:
-      hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgres94Dialect
+      hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgresDialect
       hibernate.search.enabled: false
 hapi:
   fhir:
@@ -193,21 +193,29 @@ public class YourInterceptor
 
 ## Running locally
 
-The easiest way to run this server entirely depends on your environment requirements. At least, the following 4 ways are supported:
+The easiest way to run this server entirely depends on your environment requirements. The following ways are supported:
 
 ### Using jetty
 ```bash
-mvn -Pjetty jetty:run
+mvn -Pjetty spring-boot:run
 ```
 
+The Server will then be accessible at http://localhost:8080/fhir and the CapabilityStatement will be found at http://localhost:8080/fhir/metadata.
 
-If you need to run this server on a different port (using Maven), you can change the port in the run command as follows:
-
+### Using Spring Boot
 ```bash
-mvn -Pjetty -Djetty.port=8888 jetty:run
+mvn spring-boot:run
 ```
 
-Server will then be accessible at http://localhost:8888/ and eg. http://localhost:8888/fhir/metadata. Remember to adjust you overlay configuration in the application.yaml to eg.
+The Server will then be accessible at http://localhost:8080/fhir and the CapabilityStatement will be found at http://localhost:8080/fhir/metadata.
+If you want to run this server on a different port, you can change the port in the `src/main/resources/application.yaml` file as follows:
+```yaml
+server:
+#  servlet:
+#    context-path: /example/path
+  port: 8888
+```
+The Server will then be accessible at http://localhost:8888/fhir and the CapabilityStatement will be found at http://localhost:8888/fhir/metadata. Remember to adjust your overlay configuration in the `application.yaml` file to the following:
 
 ```yaml
     tester:
@@ -223,7 +231,7 @@ Server will then be accessible at http://localhost:8888/ and eg. http://localhos
 ```bash
 mvn clean spring-boot:run -Pboot
 ```
-Server will then be accessible at http://localhost:8080/ and eg. http://localhost:8080/fhir/metadata. Remember to adjust you overlay configuration in the application.yaml to eg.
+Server will then be accessible at http://localhost:8080/ and eg. http://localhost:8080/fhir/metadata. Remember to adjust you overlay configuration in the application.yaml to the following:
 
 ```yaml
     tester:
@@ -237,9 +245,9 @@ Server will then be accessible at http://localhost:8080/ and eg. http://localhos
 
 ### Using Spring Boot
 ```bash
-mvn clean package spring-boot:repackage -Pboot && java -jar target/ROOT.war
+mvn clean package spring-boot:repackage -DskipTests=true -Pboot && java -jar target/ROOT.war
 ```
-Server will then be accessible at http://localhost:8080/ and eg. http://localhost:8080/fhir/metadata. Remember to adjust your overlay configuration in the application.yaml to eg.
+Server will then be accessible at http://localhost:8080/ and eg. http://localhost:8080/fhir/metadata. Remember to adjust your overlay configuration in the application.yaml to the following:
 
 ```yaml
     tester:
@@ -254,7 +262,7 @@ Server will then be accessible at http://localhost:8080/ and eg. http://localhos
 ```bash
 mvn clean package com.google.cloud.tools:jib-maven-plugin:dockerBuild -Dimage=distroless-hapi && docker run -p 8080:8080 distroless-hapi
 ```
-Server will then be accessible at http://localhost:8080/ and eg. http://localhost:8080/fhir/metadata. Remember to adjust your overlay configuration in the application.yaml to eg.
+Server will then be accessible at http://localhost:8080/ and eg. http://localhost:8080/fhir/metadata. Remember to adjust your overlay configuration in the application.yaml to the following:
 
 ```yaml
     tester:
@@ -270,7 +278,7 @@ Server will then be accessible at http://localhost:8080/ and eg. http://localhos
 ```bash
 ./build-docker-image.sh && docker run -p 8080:8080 hapi-fhir/hapi-fhir-jpaserver-starter:latest
 ```
-Server will then be accessible at http://localhost:8080/ and eg. http://localhost:8080/fhir/metadata. Remember to adjust your overlay configuration in the application.yaml to eg.
+Server will then be accessible at http://localhost:8080/ and eg. http://localhost:8080/fhir/metadata. Remember to adjust your overlay configuration in the application.yaml to the following:
 
 ```yaml
     tester:
@@ -305,7 +313,7 @@ spring:
     driverClassName: org.postgresql.Driver
   jpa:
     properties:
-      hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgres94Dialect
+      hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgresDialect
       hibernate.search.enabled: false
 
       # Then comment all hibernate.search.backend.*
@@ -342,6 +350,12 @@ It is recommended to deploy a case-sensitive database prior to running HAPI FHIR
 ## Adding custom interceptors
 Custom interceptors can be registered with the server by including the property `hapi.fhir.custom-interceptor-classes`. This will take a comma separated list of fully-qualified class names which will be registered with the server.
 Interceptors will be discovered in one of two ways:
+1) discovered from the Spring application context as existing Beans (can be used in conjunction with `hapi.fhir.custom-bean-packages`) or registered with Spring via other methods
+or
+2) classes will be instantiated via reflection if no matching Bean is found
+## Adding custom operations(providers)
+Custom operations(providers) can be registered with the server by including the property `hapi.fhir.custom-provider-classes`. This will take a comma separated list of fully-qualified class names which will be registered with the server.
+Providers will be discovered in one of two ways:
 
 1) discovered from the Spring application context as existing Beans (can be used in conjunction with `hapi.fhir.custom-bean-packages`) or registered with Spring via other methods
 
@@ -413,7 +427,7 @@ spring:
     driverClassName: org.postgresql.Driver
 jpa:
   properties:
-    hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgres94Dialect
+    hibernate.dialect: ca.uhn.fhir.jpa.model.dialect.HapiFhirPostgresDialect
     hibernate.search.enabled: false
 
     # Then comment all hibernate.search.backend.*
@@ -466,7 +480,9 @@ The server may be configured with subscription support by enabling properties in
 
 ## Enabling Clinical Reasoning
 
-Set `hapi.fhir.cr_enabled=true` in the [application.yaml](https://github.com/hapifhir/hapi-fhir-jpaserver-starter/blob/master/src/main/resources/application.yaml) file to enable [Clinical Quality Language](https://cql.hl7.org/) on this server.
+Set `hapi.fhir.cr.enabled=true` in the [application.yaml](https://github.com/hapifhir/hapi-fhir-jpaserver-starter/blob/master/src/main/resources/application.yaml) file to enable [Clinical Quality Language](https://cql.hl7.org/) on this server.  An alternate settings file, [cds.application.yaml](https://github.com/hapifhir/hapi-fhir-jpaserver-starter/blob/master/src/main/resources/cds.application.yaml), exists with the Clinical Reasoning module enabled and default settings that have been found to work with most CDS and dQM test cases.
+## Enabling CDS Hooks
+Set `hapi.fhir.cdshooks.enabled=true` in the [application.yaml](https://github.com/hapifhir/hapi-fhir-jpaserver-starter/blob/master/src/main/resources/application.yaml) file to enable [CDS Hooks](https://cds-hooks.org/) on this server.  The Clinical Reasoning module must also be enabled because this implementation of CDS Hooks includes [CDS on FHIR](https://build.fhir.org/clinicalreasoning-cds-on-fhir.html).  An example CDS Service using CDS on FHIR is available in the CdsHooksServletIT test class.
 
 ## Enabling MDM (EMPI)
 

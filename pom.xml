@@ -14,7 +14,7 @@
     <parent>
         <groupId>ca.uhn.hapi.fhir</groupId>
         <artifactId>hapi-fhir</artifactId>
-        <version>6.10.5</version>
+        <version>7.6.1</version>
     </parent>
 
     <artifactId>hapi-fhir-jpaserver-pdex-server</artifactId>
@@ -22,8 +22,6 @@
 
     <properties>
         <java.version>17</java.version>
-        <logback-classic.version>1.2.11</logback-classic.version>
-        <slf4j-api.version>1.7.25</slf4j-api.version>
     </properties>
 
     <prerequisites>
@@ -54,16 +52,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-jetty-api</artifactId>
-            <version>${jetty_version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-jetty-client</artifactId>
-            <version>${jetty_version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
         </dependency>
@@ -88,13 +76,13 @@
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-base</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <!-- This dependency includes the EmailSenderImpl we will be using instead of standard javamail.-->
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-jpaserver-subscription</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.zaxxer</groupId>
@@ -107,7 +95,7 @@
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-jpaserver-base</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework</groupId>
@@ -123,13 +111,13 @@
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-storage-cr</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <!-- This dependency includes the JPA MDM Server -->
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-jpaserver-mdm</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -139,13 +127,13 @@
         <dependency>
           <groupId>ca.uhn.hapi.fhir</groupId>
           <artifactId>hapi-fhir-server-cds-hooks</artifactId>
-          <version>${project.version}</version>
+          <version>${project.parent.version}</version>
         </dependency>
         <!-- This dependency includes the OpenAPI Server -->
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-server-openapi</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
             <exclusions>
                 <exclusion>
                     <groupId>org.yaml</groupId>
@@ -157,21 +145,21 @@
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-testpage-overlay</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
             <type>war</type>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-testpage-overlay</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
             <classifier>classes</classifier>
         </dependency>
         <!-- This dependency is used to include the IPS Base Implementation -->
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-jpaserver-ips</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
         </dependency>
 
         <!-- HAPI-FHIR uses Logback for logging support. The logback library is included automatically by Maven as a part of the hapi-fhir-base dependency, but you also need to include a logging library. Logback
@@ -180,11 +168,14 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+        </dependency>
         <!-- Needed for JEE/Servlet support -->
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -200,7 +191,13 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
         </dependency>
-
+        <!-- commons-logging is provided by jcl-over-slf4j, and the jar often shows up because of transitive dependencies; this dependency should avoid it -->
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.2</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- You may not need this if you are deploying to an application server which provides database connection pools itself. -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -249,12 +246,17 @@
             <groupId>org.webjars.bower</groupId>
             <artifactId>moment</artifactId>
         </dependency>
-
+        <!-- The following dependencies are only needed for automated unit tests, you do not neccesarily need them to run the example. -->
+        <dependency>
+            <groupId>co.elastic.clients</groupId>
+            <artifactId>elasticsearch-java</artifactId>
+            <scope>test</scope>
+        </dependency>
         <!-- The following dependencies are only needed for automated unit tests, you do not neccesarily need them to run the example. -->
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-jpaserver-test-utilities</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>
@@ -262,36 +264,6 @@
                     <artifactId>jaxb-impl</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-servlets</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-servlet</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty.websocket</groupId>
-            <artifactId>websocket-jetty-server</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-server</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-util</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-webapp</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
@@ -314,16 +286,34 @@
         For some reason JavaDoc crashed during site generation unless we have this dependency
         -->
         <dependency>
-            <groupId>javax.interceptor</groupId>
-            <artifactId>javax.interceptor-api</artifactId>
+            <groupId>jakarta.interceptor</groupId>
+            <artifactId>jakarta.interceptor-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-test-utilities</artifactId>
-            <version>${project.version}</version>
+            <version>${project.parent.version}</version>
             <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.jetty.ee10</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty.ee10.websocket</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty.websocket</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -349,14 +339,20 @@
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-core</artifactId>
-            <version>1.11.3</version>
+            <version>1.13.3</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus -->
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus</artifactId>
-            <version>1.11.3</version>
+            <version>1.13.3</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus-simpleclient -->
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus-simpleclient</artifactId>
+            <version>1.13.3</version>
         </dependency>
 
         <dependency>
@@ -369,44 +365,23 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.7.2</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.7.2</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>${spring_boot_version}</version>
             <scope>test</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slf4j-api.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${logback-classic.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>${logback-classic.version}</version>
-        </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.32</version>
+            <version>1.18.34</version>
         </dependency>
         <dependency>
             <groupId>com.auth0</groupId>
@@ -438,7 +413,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.1.2</version>
+                    <version>3.4.0</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -450,6 +425,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <!--
+                    java -jar ROOT.war doesn't work; there is a bug in spring-boot-3.2.0 due to hibernate search,
+                    probably solved in 3.2.1 https://github.com/spring-projects/spring-boot/issues/38585
+                    (at the moment only tomcat works)
+                    -->
+                    <loaderImplementation>CLASSIC</loaderImplementation>
+                </configuration>
                 <executions>
                     <execution>
                         <goals>
@@ -466,9 +449,21 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.11.0</version>
+                <version>3.13.0</version>
                 <configuration>
-                    <release>11</release>
+                    <release>${java.version}</release>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                            <version>1.18.34</version>
+                        </path>
+                        <path>
+                            <groupId>com.google.errorprone</groupId>
+                            <artifactId>error_prone_core</artifactId>
+                            <version>${error_prone_core_version}</version>
+                        </path>
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
 
@@ -497,6 +492,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.4.0</version>
                 <configuration>
                     <redirectTestOutputToFile>true</redirectTestOutputToFile>
                 </configuration>
@@ -655,6 +651,11 @@
                         </exclusion>
                     </exclusions>
                 </dependency>
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-jetty</artifactId>
+                    <version>${spring_boot_version}</version>
+                </dependency>
             </dependencies>
         </profile>
         <profile>
@@ -712,6 +713,19 @@
                     </plugin>
                 </plugins>
             </build>
+        </profile>
+        <!-- For connecting to GCP CloudSQL Postgres instances:
+                https://github.com/GoogleCloudPlatform/cloud-sql-jdbc-socket-factory/blob/main/docs/jdbc.md#postgres-1
+                Needs 'boot' profile as well. -->
+        <profile>
+            <id>cloudsql-postgres</id>
+            <dependencies>
+                <dependency>
+                    <groupId>com.google.cloud.sql</groupId>
+                    <artifactId>postgres-socket-factory</artifactId>
+                    <version>1.17.0</version>
+                </dependency>
+            </dependencies>
         </profile>
     </profiles>
 </project>

@@ -9,7 +9,7 @@ import ca.uhn.hapi.fhir.cdshooks.api.json.CdsServiceRequestJson;
 import ca.uhn.hapi.fhir.cdshooks.api.json.CdsServiceResponseCardJson;
 import ca.uhn.hapi.fhir.cdshooks.api.json.CdsServiceResponseCardSourceJson;
 import ca.uhn.hapi.fhir.cdshooks.api.json.CdsServiceResponseJson;
-
+import ca.uhn.hapi.fhir.cdshooks.api.json.CdsHooksExtension;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
@@ -35,7 +35,7 @@ public class PdexAppointmentBookCdsService {
       Patient patient = (Patient) theCdsRequest.getPrefetch("patient");
       Encounter encounter = (Encounter) theCdsRequest.getPrefetch("encounter");
       Bundle appts = (Bundle) theCdsRequest.getContext().getResource("appointments");
-      String extension = theCdsRequest.getExtension();
+      CdsHooksExtension extension = theCdsRequest.getExtension();
       System.out.println(theCdsRequest.toString());
       CdsServiceResponseJson response = new CdsServiceResponseJson();
       CdsServiceResponseCardJson card = new CdsServiceResponseCardJson();
