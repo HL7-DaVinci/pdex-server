@@ -166,19 +166,10 @@ hapi:
     
     # install_transitive_ig_dependencies: true
     implementationguides:
-    #  ndh:
-    #    url: https://build.fhir.org/ig/HL7/fhir-us-ndh/package.tgz
-    #    name: hl7.fhir.us.ndh
-    #    version: 0.1.0
-#      vsac:
-#        url: http://fhir.org/packages/us.nlm.vsac/0.9.0/package.tgz
-#        name: us.nlm.vsac
-#        version: 0.9.0
       pdex:
-        packageUrl: https://www.hl7.org/fhir/us/davinci-pdex/package.tgz
         name: hl7.fhir.us.davinci-pdex
-        version: 2.0.0
-        fetchDependencies: true
+        version: 2.1.0
+        fetchDependencies: false
         installMode: STORE_ONLY
         reloadExisting: true
     #    supported_resource_types:
