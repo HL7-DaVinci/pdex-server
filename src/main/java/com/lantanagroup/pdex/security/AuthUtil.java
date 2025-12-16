@@ -1,14 +1,11 @@
 package com.lantanagroup.pdex.security;
 
 import java.io.IOException;
-import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.security.interfaces.RSAPublicKey;
+import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -49,29 +46,34 @@ public class AuthUtil {
       return true;
     }
 
+    // Bypass auth for public endpoints
+    List<String> publicEndpoints = List.of("/fhir/metadata", "/fhir/.well-known/udap");
+    String requestPath = theRequestDetails.getCompleteUrl();
+    if (publicEndpoints.stream().anyMatch(requestPath::endsWith)) {
+      return true;
+    }
+
     return false;
   }
 
 
   public static DecodedJWT getToken(RequestDetails theRequestDetails, SecurityProperties securityProperties) {
-    
+
     String authHeader = theRequestDetails.getHeader(Constants.HEADER_AUTHORIZATION);
-    if (authHeader == null) {
-      return null;
+    if (authHeader == null || authHeader.isEmpty()
+            || !authHeader.startsWith(Constants.HEADER_AUTHORIZATION_VALPREFIX_BEARER)) {
+      throw new AuthenticationException("Missing or invalid Authorization header");
     }
 
-    if (!authHeader.startsWith(Constants.HEADER_AUTHORIZATION_VALPREFIX_BEARER)) {
-      throw new AuthenticationException("Expected Bearer token not found in Authorization header");
-    }
-
-    String token = authHeader.substring(Constants.HEADER_AUTHORIZATION_VALPREFIX_BEARER.length()).trim();    
+    // Get token from header
+    String token = authHeader.substring(Constants.HEADER_AUTHORIZATION_VALPREFIX_BEARER.length()).trim();
     DecodedJWT jwt = null;
 
     try {
       // configured as confidential client
       if (
-        securityProperties.getClientId() != null && !securityProperties.getClientId().isBlank() 
-        && securityProperties.getClientSecret() != null && !securityProperties.getClientSecret().isBlank() 
+        securityProperties.getClientId() != null && !securityProperties.getClientId().isBlank()
+        && securityProperties.getClientSecret() != null && !securityProperties.getClientSecret().isBlank()
         && securityProperties.getIntrospectionUrl() != null && !securityProperties.getIntrospectionUrl().isBlank()
         ) {
         jwt = introspectionCheck(token, securityProperties);
@@ -82,7 +84,7 @@ public class AuthUtil {
       }
     } catch (Exception e) {
       throw new AuthenticationException("Error parsing token: " + e.getMessage());
-    }    
+    }
 
     return jwt;
   }
@@ -117,25 +119,45 @@ public class AuthUtil {
   public static DecodedJWT validateToken(String token, SecurityProperties securityProperties) throws JwkException, IOException, InterruptedException {
 
     DecodedJWT decodedJWT = JWT.decode(token);
+    String issuer = securityProperties.getIssuer();
 
-    HttpClient client = HttpClient.newBuilder().build();
+    // Validate issuer
+    if (!decodedJWT.getIssuer().equals(issuer)) {
+      throw new JWTVerificationException(
+              "Invalid issuer: Expected \"" + issuer + "\" but received \"" + decodedJWT.getIssuer() + "\"");
+    }
+
+    // Get JWKS URI from OIDC discovery
+    /*HttpClient client = HttpClient.newBuilder().build();
     HttpRequest request = HttpRequest.newBuilder()
       .uri(URI.create(StringUtils.removeEnd(securityProperties.getIssuer(), "/") + "/.well-known/openid-configuration"))
       .build();
     HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-    String jwksUri = new ObjectMapper().readTree(response.body()).get("jwks_uri").asText();
+    String jwksUri = new ObjectMapper().readTree(response.body()).get("jwks_uri").asText();*/
 
-    JwkProvider provider = new UrlJwkProvider(new URL(jwksUri));
-    Jwk jwk = provider.get(decodedJWT.getKeyId());
+    // Get public key from JWKS endpoint
+    String jwksUri = securityProperties.getIssuer() + "/.well-known/openid-configuration/jwks";
+    JwkProvider jwkProvider = new UrlJwkProvider(new URL(jwksUri));
+    Jwk jwk = jwkProvider.get(decodedJWT.getKeyId());
 
     RSAPublicKey rsaPublicKey = (RSAPublicKey) jwk.getPublicKey();
 
+    if (rsaPublicKey == null) {
+      throw new JWTVerificationException("Could not determine public key");
+    }
+
+    // Verify token
     Algorithm algorithm = Algorithm.RSA256(rsaPublicKey, null);
     JWTVerifier verifier = JWT.require(algorithm)
-      .withIssuer(securityProperties.getIssuer())
-      .build();
-
-    return verifier.verify(token);
+            .withIssuer(issuer)
+            .build();
+    DecodedJWT verifiedJwt;
+    try {
+      verifiedJwt = verifier.verify(token);
+    } catch (JWTVerificationException e) {
+      throw new AuthenticationException("Token verification failed: " + e.getMessage());
+    }
+    return verifiedJwt;
 
   }
 

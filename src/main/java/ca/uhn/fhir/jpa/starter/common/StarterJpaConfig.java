@@ -382,7 +382,7 @@ public class StarterJpaConfig {
 		fhirServer.registerProvider(new DavinciDataExportProvider(fhirServer.getFhirContext(), daoRegistry, theJobCoordinator, bulkDataExportProvider));
 
 		// Register Process Customizer that will do initial load (and possibly other things)
-		fhirServer.registerInterceptor(new ProcessCustomizer(fhirServer.getFhirContext(), daoRegistry));
+		//fhirServer.registerInterceptor(new ProcessCustomizer(fhirServer.getFhirContext(), daoRegistry));
 
 		/*
 		 * If you are using DSTU3+, you may want to add a terminology uploader, which allows
