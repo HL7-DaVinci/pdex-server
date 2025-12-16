@@ -30,14 +30,22 @@ public class AuthInterceptor extends AuthorizationInterceptor {
   @Override
   public List<IAuthRule> buildRuleList(RequestDetails theRequestDetails) {
 
+    // Bypass all auth checks if configured to do so
     if (AuthUtil.bypassAuth(theRequestDetails, securityProperties)) {
       //myLogger.debug("Bypassing auth checks for request to {}", theRequestDetails.getCompleteUrl());
       return new RuleBuilder().allowAll().build();
     }
 
+    // Get the token from the request (this also validates the token)
+    DecodedJWT jwt = AuthUtil.getToken(theRequestDetails, securityProperties);
+
+    // If configuration does not require patient claim, allow all access
+    if (!securityProperties.isPatientClaimRequired()) {
+      return new RuleBuilder().allowAll().build();
+    }
+
     var ruleBuilder = new RuleBuilder().allow().metadata();
 
-    DecodedJWT jwt = AuthUtil.getToken(theRequestDetails, securityProperties);
     if (jwt != null) {
 
       // Check if this is a patient

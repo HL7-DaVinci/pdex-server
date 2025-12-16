@@ -35,6 +35,9 @@ public class SecurityProperties {
   String tokenUrl;
 
   @Getter @Setter
+  boolean patientClaimRequired;
+
+  @Getter @Setter
   @NestedConfigurationProperty
   private UdapProperties udap;
 

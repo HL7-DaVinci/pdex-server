@@ -42,6 +42,7 @@ security:
   authorization-url: 
   introspection-url: 
   token-url: 
+  patient-claim-required: false
   udap:
     security-server-base: https://udap-security.fast.hl7.org
     cert-file: classpath:cert-local-pdex-server.pfx
