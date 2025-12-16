@@ -1,6 +1,7 @@
 package com.lantanagroup.pdex.security;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.context.properties.NestedConfigurationProperty;
 import org.springframework.context.annotation.Configuration;
 
 import lombok.Getter;
@@ -32,5 +33,9 @@ public class SecurityProperties {
   String introspectionUrl;
   @Getter @Setter
   String tokenUrl;
+
+  @Getter @Setter
+  @NestedConfigurationProperty
+  private UdapProperties udap;
 
 }

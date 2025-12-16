@@ -31,6 +31,7 @@ public class AuthInterceptor extends AuthorizationInterceptor {
   public List<IAuthRule> buildRuleList(RequestDetails theRequestDetails) {
 
     if (AuthUtil.bypassAuth(theRequestDetails, securityProperties)) {
+      //myLogger.debug("Bypassing auth checks for request to {}", theRequestDetails.getCompleteUrl());
       return new RuleBuilder().allowAll().build();
     }
 
@@ -47,6 +48,8 @@ public class AuthInterceptor extends AuthorizationInterceptor {
         ruleBuilder = ruleBuilder
           .andThen().allow().read().allResources().inCompartment("Patient", patientId)
           .andThen().allow().write().allResources().inCompartment("Patient", patientId);
+      } else {
+        myLogger.info("No patient claim found in token");
       }
 
     }

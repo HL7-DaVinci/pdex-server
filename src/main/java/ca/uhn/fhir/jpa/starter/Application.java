@@ -30,6 +30,7 @@ import org.springframework.context.annotation.Import;
 
 import com.lantanagroup.pdex.CapabilityStatementCustomizer;
 import com.lantanagroup.pdex.security.AuthInterceptor;
+import com.lantanagroup.pdex.security.DiscoveryInterceptor;
 import com.lantanagroup.pdex.security.SearchInterceptor;
 import com.lantanagroup.pdex.security.SecurityProperties;
 import com.lantanagroup.pdex.security.SmartDiscoveryInterceptor;
@@ -77,8 +78,9 @@ public class Application extends SpringBootServletInitializer {
 		// Register capability statement customizer
 		restfulServer.registerInterceptor(new CapabilityStatementCustomizer(appProperties, securityProperties));
 
-		// Add interceptors for SMART on FHIR support
+		// Add interceptors for SMART on FHIR and UDAP support
 		restfulServer.registerInterceptor(new SmartDiscoveryInterceptor(appProperties, securityProperties));
+		restfulServer.registerInterceptor(new DiscoveryInterceptor(appProperties, securityProperties));
 		restfulServer.registerInterceptor(new AuthInterceptor(appProperties, securityProperties));
 		restfulServer.registerInterceptor(new SearchInterceptor(appProperties, securityProperties));
 
