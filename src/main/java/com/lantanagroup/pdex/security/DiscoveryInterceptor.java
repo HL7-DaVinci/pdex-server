@@ -1,7 +1,7 @@
 package com.lantanagroup.pdex.security;
 
 import java.io.IOException;
-import java.io.FileInputStream;
+import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
@@ -18,7 +18,11 @@ import java.util.Map;
 import java.util.UUID;
 
 import ca.uhn.fhir.jpa.starter.AppProperties;
-import org.springframework.util.ResourceUtils;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
+import org.springframework.core.io.support.ResourcePatternUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import com.auth0.jwt.JWT;
@@ -34,6 +38,9 @@ public class DiscoveryInterceptor {
 
   private final UdapProperties udapProperties;
   private final AppProperties appProperties;
+
+  @Autowired
+  private ResourceLoader resourceLoader;
 
   public DiscoveryInterceptor(AppProperties appProperties, SecurityProperties securityProperties) {
     this.udapProperties = securityProperties.getUdap();
@@ -60,9 +67,11 @@ public class DiscoveryInterceptor {
     String fhirBase = appProperties.getServer_address();
 
     // Load certificate and keys
-    FileInputStream stream = new FileInputStream(ResourceUtils.getFile(certFile));
+    Resource certFileResource = ResourcePatternUtils.getResourcePatternResolver(resourceLoader).getResource(certFile);
     KeyStore ks = KeyStore.getInstance("pkcs12");
-    ks.load(stream, certPass.toCharArray());
+    try(InputStream stream = certFileResource.getInputStream()) {
+        ks.load(stream, certPass.toCharArray());
+    }
     String alias = ks.aliases().nextElement();
 
     X509Certificate certificate = (X509Certificate) ks.getCertificate(alias);
