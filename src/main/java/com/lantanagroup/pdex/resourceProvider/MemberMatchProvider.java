@@ -27,7 +27,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import ca.uhn.fhir.context.FhirContext;
-import ca.uhn.fhir.jpa.starter.AppProperties;
 import ca.uhn.fhir.rest.annotation.Operation;
 import ca.uhn.fhir.rest.annotation.OperationParam;
 import ca.uhn.fhir.rest.server.IResourceProvider;
@@ -68,10 +67,6 @@ public class MemberMatchProvider implements IResourceProvider {
   private final String PARAM_CONSENT_PERFORMER_REFERENCE = "Consent's Performer Reference";
   private final MemberMatcherHelper myMemberMatcherHelper;
 
-  @Autowired
-  AppProperties appProperties;
-
-  FhirContext theContext;
   IFhirResourceDao<Coverage> theCoverageDao;
   IFhirResourceDao<Patient> thePatientDao;
   IFhirResourceDao<Consent> theConsentDao;
@@ -143,7 +138,24 @@ public class MemberMatchProvider implements IResourceProvider {
   public Parameters doMemberMatchOperation(Patient theMemberPatient,
 															Coverage theCoverageToMatch, Coverage theCoverageToLink, Consent theConsent, RequestDetails theRequestDetails) {
 
-		validateParams(theMemberPatient, theCoverageToMatch, theCoverageToLink, theConsent);
+		validateParam(theCoverageToLink, PARAM_NEW_COVERAGE);
+		matchMember(theMemberPatient, theCoverageToMatch, theConsent, theRequestDetails);
+		return myMemberMatcherHelper.buildSuccessReturnParameters(theMemberPatient, theCoverageToLink, theConsent);
+	}
+
+	/**
+	 * Shared match core for $member-match and $bulk-member-match; CoverageToLink is
+	 * not part of matching. On success, adds the member identifier to theMemberPatient,
+	 * persists the Consent, and returns the matched Patient from this server's store.
+	 */
+	public Patient matchMember(Patient theMemberPatient,
+															Coverage theCoverageToMatch, Consent theConsent, RequestDetails theRequestDetails) {
+
+		validateParam(theMemberPatient, PARAM_MEMBER_PATIENT);
+		validateParam(theCoverageToMatch, PARAM_OLD_COVERAGE);
+		validateParam(theConsent, PARAM_CONSENT);
+		validateMemberPatientParam(theMemberPatient);
+		validateConsentParam(theConsent);
 
 		Optional<Coverage> coverageOpt = myMemberMatcherHelper.findMatchingCoverage(theCoverageToMatch, theRequestDetails);
 		if (coverageOpt.isEmpty()) {
@@ -181,16 +193,7 @@ public class MemberMatchProvider implements IResourceProvider {
 
 	  myMemberMatcherHelper.addMemberIdentifierToMemberPatient(theMemberPatient, patient.getIdentifierFirstRep());
 	  myMemberMatcherHelper.updateConsentForMemberMatch(theConsent, patient, theMemberPatient, theRequestDetails);
-		return myMemberMatcherHelper.buildSuccessReturnParameters(theMemberPatient, theCoverageToLink, theConsent);
-	}
-
-	private void validateParams(Patient theMemberPatient, Coverage theOldCoverage, Coverage theNewCoverage, Consent theConsent) {
-		validateParam(theMemberPatient, PARAM_MEMBER_PATIENT);
-		validateParam(theOldCoverage, PARAM_OLD_COVERAGE);
-		validateParam(theNewCoverage, PARAM_NEW_COVERAGE);
-		validateParam(theConsent, PARAM_CONSENT);
-		validateMemberPatientParam(theMemberPatient);
-		validateConsentParam(theConsent);
+		return patient;
 	}
 
 	private void validateParam(@Nullable Object theParam, String theParamName) {

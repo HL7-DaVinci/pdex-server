@@ -66,7 +66,7 @@ import ca.uhn.fhir.validation.IValidatorModule;
 import ca.uhn.fhir.validation.ResultSeverityEnum;
 import com.google.common.base.Strings;
 import com.lantanagroup.pdex.export.DavinciDataExportProvider;
-import com.lantanagroup.pdex.resourceProvider.BulkMemberMatchProvider;
+import com.lantanagroup.pdex.bulkmembermatch.BulkMemberMatchProvider;
 import com.lantanagroup.pdex.resourceProvider.MemberMatchProvider;
 import com.lantanagroup.pdex.security.SecurityProperties;
 
@@ -378,7 +378,7 @@ public class StarterJpaConfig {
 		// Added by Corey Spears to register custom member-match operation
 		MemberMatchProvider memberMatchProvider = new MemberMatchProvider(fhirServer.getFhirContext(), daoRegistry);
 		fhirServer.registerProvider(memberMatchProvider);
-		fhirServer.registerProvider(new BulkMemberMatchProvider(fhirServer.getFhirContext(), daoRegistry, memberMatchProvider));
+		fhirServer.registerProvider(new BulkMemberMatchProvider(fhirServer.getFhirContext(), daoRegistry, theJobCoordinator));
 		fhirServer.registerProvider(new DavinciDataExportProvider(fhirServer.getFhirContext(), daoRegistry, theJobCoordinator, bulkDataExportProvider));
 
 		// Register Process Customizer that will do initial load (and possibly other things)
