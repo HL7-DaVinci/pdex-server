@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.hl7.fhir.instance.model.api.IBaseOperationOutcome;
 import org.hl7.fhir.instance.model.api.IPrimitiveType;
-import org.hl7.fhir.r4.model.Binary;
 import org.hl7.fhir.r4.model.Consent;
 import org.hl7.fhir.r4.model.Coverage;
 import org.hl7.fhir.r4.model.Group;
@@ -52,9 +51,10 @@ import jakarta.servlet.http.HttpServletResponse;
 
 /**
  * PDex $bulk-member-match: async kickoff returning 202 + Content-Location, with the
- * result retrieved from $bulk-member-match-poll-status. Responses conform to STU 2.1
- * (Parameters envelope) by default; a client selects STU 2.2 behavior (bulk manifest +
- * Group ndjson) per request via the X-PDex-Spec-Version header or a pdex-spec Prefer token.
+ * result retrieved from $bulk-member-match-poll-status as a Bulk Data completion manifest
+ * per the Async Request Pattern. STU 2.1 (default) reports a Parameters Binary; a client
+ * selects STU 2.2 behavior (Group ndjson Binaries) per request via the X-PDex-Spec-Version
+ * header or a pdex-spec Prefer token.
  */
 public class BulkMemberMatchProvider {
 
@@ -215,9 +215,9 @@ public class BulkMemberMatchProvider {
   }
 
   /**
-   * STU 2.1 jobs report a Parameters Binary whose content is returned directly as the
-   * operation response; STU 2.2 jobs report Group ndjson Binaries referenced from a
-   * Bulk Data completion manifest.
+   * Both STU 2.1 and STU 2.2 jobs report their result Binaries (a Parameters Binary for
+   * 2.1, Group ndjson Binaries for 2.2) referenced from a Bulk Data completion manifest,
+   * per the Bulk Data Status Request guidance the IG defers to.
    */
   private void writeCompletedResponse(ServletRequestDetails theRequestDetails, HttpServletResponse response,
       JobInstance info) throws IOException {
@@ -233,15 +233,6 @@ public class BulkMemberMatchProvider {
     Map<String, List<String>> binaryIds = results.getResourceTypeToBinaryIds();
 
     response.setStatus(Constants.STATUS_HTTP_200_OK);
-
-    if (binaryIds.containsKey("Parameters")) {
-      Binary envelope = daoRegistry.getResourceDao(Binary.class)
-          .read(new IdType(binaryIds.get("Parameters").get(0)), theRequestDetails);
-      response.setContentType(Constants.CT_FHIR_JSON_NEW);
-      response.getOutputStream().write(envelope.getContent());
-      response.getOutputStream().close();
-      return;
-    }
 
     BulkExportResponseJson manifest = new BulkExportResponseJson();
     manifest.setTransactionTime(info.getEndTime());
