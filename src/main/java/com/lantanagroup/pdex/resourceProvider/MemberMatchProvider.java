@@ -9,8 +9,7 @@ package com.lantanagroup.pdex.resourceProvider;
 // HAPI recent versions removed the  MemberMatchR4ResourceProvider and related classes.
 // Moved code to local MemberMatcherHelper temporarily
 
-// Rick Geimer: this class needs to be registered in ca.uhn.fhir.jpa.starter.common.StarterJpaConfig in the restfulServer() method as follows:
-// fhirServer.registerProvider(new MemberMatchProvider(fhirServer.getFhirContext(), daoRegistry));
+// Rick Geimer: this class is registered with the RestfulServer by com.lantanagroup.pdex.PdexServerCustomizer.
 
 
 

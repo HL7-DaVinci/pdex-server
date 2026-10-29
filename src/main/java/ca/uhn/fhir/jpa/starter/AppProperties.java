@@ -110,8 +110,6 @@ public class AppProperties {
 
 	private List<Integer> search_prefetch_thresholds = new ArrayList<>();
 
-    private List<String> initialData = new ArrayList<>();
-
 	public List<String> getCustomInterceptorClasses() {
     return custom_interceptor_classes;
   }
@@ -665,14 +663,6 @@ public Cors getCors() {
 	public void  setSearch_prefetch_thresholds(List<Integer> thePrefetchThresholds) {
 		this.search_prefetch_thresholds = thePrefetchThresholds;
 	}
-
-    public List<String> getInitialData() {
-        return initialData;
-    }
-
-    public void setInitialData(List<String> initialData) {
-        this.initialData = initialData;
-    }
 
 	public boolean getUpliftedRefchains_enabled() {
 		return upliftedRefchains_enabled;

@@ -14,7 +14,7 @@
     <parent>
         <groupId>ca.uhn.hapi.fhir</groupId>
         <artifactId>hapi-fhir</artifactId>
-        <version>7.6.1</version>
+        <version>7.6.0</version>
     </parent>
 
     <artifactId>hapi-fhir-jpaserver-pdex-server</artifactId>
@@ -42,7 +42,8 @@
 
     <dependencyManagement>
        <dependencies>
-           <dependency>
+
+            <dependency>
                <groupId>org.glassfish.jaxb</groupId>
                <artifactId>jaxb-runtime</artifactId>
                <version>2.3.8</version>
@@ -51,6 +52,7 @@
     </dependencyManagement>
 
     <dependencies>
+
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
@@ -172,6 +174,7 @@
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-core</artifactId>
         </dependency>
+
         <!-- Needed for JEE/Servlet support -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
@@ -191,6 +194,7 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
         </dependency>
+
         <!-- commons-logging is provided by jcl-over-slf4j, and the jar often shows up because of transitive dependencies; this dependency should avoid it -->
         <dependency>
             <groupId>commons-logging</groupId>
@@ -198,6 +202,7 @@
             <version>1.2</version>
             <scope>provided</scope>
         </dependency>
+
         <!-- You may not need this if you are deploying to an application server which provides database connection pools itself. -->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -246,13 +251,14 @@
             <groupId>org.webjars.bower</groupId>
             <artifactId>moment</artifactId>
         </dependency>
+
         <!-- The following dependencies are only needed for automated unit tests, you do not neccesarily need them to run the example. -->
         <dependency>
             <groupId>co.elastic.clients</groupId>
             <artifactId>elasticsearch-java</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- The following dependencies are only needed for automated unit tests, you do not neccesarily need them to run the example. -->
+
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
             <artifactId>hapi-fhir-jpaserver-test-utilities</artifactId>
@@ -265,6 +271,7 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>testcontainers</artifactId>
@@ -348,12 +355,14 @@
             <artifactId>micrometer-registry-prometheus</artifactId>
             <version>1.13.3</version>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-registry-prometheus-simpleclient -->
         <dependency>
             <groupId>io.micrometer</groupId>
             <artifactId>micrometer-registry-prometheus-simpleclient</artifactId>
             <version>1.13.3</version>
         </dependency>
+
 
         <dependency>
             <groupId>com.zaxxer</groupId>
@@ -634,9 +643,20 @@
                 </dependency>
             </dependencies>
         </profile>
-        <!-- examples of how to start the server using the default profile-->
-        <!-- mvn clean package jetty:run -->
-        <!-- java -jar jetty-runner.jar target/hapi-fhir-jpaserver.war -->
+        <!--                                                              -->
+        <!-- Examples of how to run the server:                           -->
+        <!--                                                              -->
+        <!-- For Spring Boot use:                                         -->
+        <!-- mvn spring-boot:run                                          -->
+        <!--                                                              -->
+        <!-- For JETTY use:                                               -->
+        <!-- mvn -Pjetty spring-boot:run                                  -->
+        <!--                                                              -->
+        <!-- For the Tomcat WAR approach use:                             -->
+        <!-- mvn clean package -DskipTests && java -jar ./target/ROOT.war -->
+        <!--                                                              -->
+        <!-- NEXT: Browse to http://localhost:8080/fhir                   -->
+        <!--                                                              -->
         <profile>
             <id>jetty</id>
             <dependencies>
@@ -715,8 +735,8 @@
             </build>
         </profile>
         <!-- For connecting to GCP CloudSQL Postgres instances:
-                https://github.com/GoogleCloudPlatform/cloud-sql-jdbc-socket-factory/blob/main/docs/jdbc.md#postgres-1
-                Needs 'boot' profile as well. -->
+        https://github.com/GoogleCloudPlatform/cloud-sql-jdbc-socket-factory/blob/main/docs/jdbc.md#postgres-1
+        Needs 'boot' profile as well. -->
         <profile>
             <id>cloudsql-postgres</id>
             <dependencies>
@@ -726,6 +746,6 @@
                     <version>1.17.0</version>
                 </dependency>
             </dependencies>
-        </profile>
+        </profile>       
     </profiles>
 </project>

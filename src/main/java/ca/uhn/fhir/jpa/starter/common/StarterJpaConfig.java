@@ -1,7 +1,6 @@
 package ca.uhn.fhir.jpa.starter.common;
 
 import ca.uhn.fhir.batch2.config.Batch2JobRegisterer;
-import ca.uhn.fhir.batch2.api.IJobCoordinator;
 import ca.uhn.fhir.batch2.coordinator.JobDefinitionRegistry;
 import ca.uhn.fhir.batch2.jobs.export.BulkDataExportProvider;
 import ca.uhn.fhir.batch2.jobs.imprt.BulkDataImportProvider;
@@ -65,11 +64,7 @@ import ca.uhn.fhir.rest.server.util.ISearchParamRegistry;
 import ca.uhn.fhir.validation.IValidatorModule;
 import ca.uhn.fhir.validation.ResultSeverityEnum;
 import com.google.common.base.Strings;
-import com.lantanagroup.pdex.export.DavinciDataExportProvider;
-import com.lantanagroup.pdex.bulkmembermatch.BulkMemberMatchProvider;
-import com.lantanagroup.pdex.resourceProvider.MemberMatchProvider;
-import com.lantanagroup.pdex.security.SecurityProperties;
-
+import jakarta.persistence.EntityManagerFactory;
 import org.hl7.fhir.common.hapi.validation.support.CachingValidationSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -86,7 +81,6 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.web.cors.CorsConfiguration;
 
 import java.util.*;
-import jakarta.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import static ca.uhn.fhir.jpa.starter.common.validation.IRepositoryValidationInterceptorFactory.ENABLE_REPOSITORY_VALIDATING_INTERCEPTOR;
@@ -117,9 +111,6 @@ public class StarterJpaConfig {
 
 	@Autowired
 	private ConfigurableEnvironment configurableEnvironment;
-
-	@Autowired
-	private SecurityProperties securityProperties;
 
 	/**
 	 * Customize the default/max page sizes for search results. You can set these however
@@ -243,10 +234,6 @@ public class StarterJpaConfig {
 		config.addAllowedHeader("X-Requested-With");
 		config.addAllowedHeader("Prefer");
 
-		if (securityProperties.getBypassHeader() != null && !securityProperties.getBypassHeader().isEmpty()) {
-			config.addAllowedHeader(securityProperties.getBypassHeader());
-		}
-
 		List<String> allAllowedCORSOrigins = appProperties.getCors().getAllowed_origin();
 		allAllowedCORSOrigins.forEach(config::addAllowedOriginPattern);
 		ourLog.info("CORS allows the following origins: " + String.join(", ", allAllowedCORSOrigins));
@@ -291,9 +278,7 @@ public class StarterJpaConfig {
 			IPackageInstallerSvc packageInstallerSvc,
 			ThreadSafeResourceDeleterSvc theThreadSafeResourceDeleterSvc,
 			ApplicationContext appContext,
-			Optional<IpsOperationProvider> theIpsOperationProvider,
-			Optional<IImplementationGuideOperationProvider> implementationGuideOperationProvider,
-			IJobCoordinator theJobCoordinator) {
+			Optional<IpsOperationProvider> theIpsOperationProvider, Optional<IImplementationGuideOperationProvider> implementationGuideOperationProvider) {
 		RestfulServer fhirServer = new RestfulServer(fhirSystemDao.getContext());
 
 		List<String> supportedResourceTypes = appProperties.getSupported_resource_types();
@@ -374,15 +359,6 @@ public class StarterJpaConfig {
 		} else {
 			fhirServer.setServerAddressStrategy(new IncomingRequestAddressStrategy());
 		}
-
-		// Added by Corey Spears to register custom member-match operation
-		MemberMatchProvider memberMatchProvider = new MemberMatchProvider(fhirServer.getFhirContext(), daoRegistry);
-		fhirServer.registerProvider(memberMatchProvider);
-		fhirServer.registerProvider(new BulkMemberMatchProvider(fhirServer.getFhirContext(), daoRegistry, theJobCoordinator));
-		fhirServer.registerProvider(new DavinciDataExportProvider(fhirServer.getFhirContext(), daoRegistry, theJobCoordinator, bulkDataExportProvider));
-
-		// Register Process Customizer that will do initial load (and possibly other things)
-		//fhirServer.registerInterceptor(new ProcessCustomizer(fhirServer.getFhirContext(), daoRegistry));
 
 		/*
 		 * If you are using DSTU3+, you may want to add a terminology uploader, which allows

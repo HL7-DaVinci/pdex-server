@@ -1,4 +1,6 @@
-package ca.uhn.fhir.jpa.starter;
+package com.lantanagroup.pdex;
+
+import ca.uhn.fhir.jpa.starter.Application;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -50,7 +52,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
     "hapi.fhir.fhir_version=r4",
     "hapi.fhir.cr_enabled=false",
     "security.enable-auth=false",
-    "security.enable-proxy=false"
+    "security.enable-proxy=false",
+    "hapi.fhir.custom-bean-packages=com.lantanagroup.pdex"
 })
 class BulkMemberMatchIT {
 

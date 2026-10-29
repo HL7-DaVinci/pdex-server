@@ -1,4 +1,4 @@
-package ca.uhn.fhir.jpa.starter.datainitializer;
+package com.lantanagroup.pdex.datainitializer;
 
 import org.springframework.boot.context.properties.bind.Binder;
 import org.springframework.context.annotation.Condition;

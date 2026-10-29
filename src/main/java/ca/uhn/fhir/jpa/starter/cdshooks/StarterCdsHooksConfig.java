@@ -12,6 +12,10 @@ import ca.uhn.hapi.fhir.cdshooks.svc.cr.CdsCrServiceRegistry;
 import ca.uhn.hapi.fhir.cdshooks.svc.cr.ICdsCrServiceRegistry;
 import ca.uhn.hapi.fhir.cdshooks.svc.cr.discovery.CdsCrDiscoveryServiceRegistry;
 import ca.uhn.hapi.fhir.cdshooks.svc.cr.discovery.ICdsCrDiscoveryServiceRegistry;
+import ca.uhn.hapi.fhir.cdshooks.svc.prefetch.CdsPrefetchDaoSvc;
+import ca.uhn.hapi.fhir.cdshooks.svc.prefetch.CdsPrefetchFhirClientSvc;
+import ca.uhn.hapi.fhir.cdshooks.svc.prefetch.CdsPrefetchSvc;
+import ca.uhn.hapi.fhir.cdshooks.svc.prefetch.CdsResolutionStrategySvc;
 import org.hl7.fhir.instance.model.api.IBaseResource;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
@@ -19,8 +23,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import com.lantanagroup.pdex.cdshooks.PdexCdsHooksContextBooter;
 
 @Configuration
 @Conditional({CdsHooksConfigCondition.class, CrConfigCondition.class})
@@ -71,9 +73,7 @@ public class StarterCdsHooksConfig {
 	@Bean
 	public CdsHooksContextBooter cdsHooksContextBooter() {
 		// ourLog.info("No Spring Context provided.  Assuming all CDS Services will be registered dynamically.");
-		// return new CdsHooksContextBooter();
-		// RG: Changed to return custom CdsHooksContextBooster
-		return new PdexCdsHooksContextBooter();
+		return new CdsHooksContextBooter();
 	}
 
 	public static class CdsHooksDaoAuthorizationSvc implements ICdsHooksDaoAuthorizationSvc {
@@ -95,6 +95,7 @@ public class StarterCdsHooksConfig {
 	public ServletRegistrationBean<CdsHooksServlet> cdsHooksRegistrationBean(AutowireCapableBeanFactory beanFactory) {
 		CdsHooksServlet cdsHooksServlet = new CdsHooksServlet();
 		beanFactory.autowireBean(cdsHooksServlet);
+
 		ServletRegistrationBean<CdsHooksServlet> registrationBean = new ServletRegistrationBean<>();
 		registrationBean.setName("cds-hooks servlet");
 		registrationBean.setServlet(cdsHooksServlet);

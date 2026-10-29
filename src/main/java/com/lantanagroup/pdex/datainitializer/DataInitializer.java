@@ -1,4 +1,4 @@
-package ca.uhn.fhir.jpa.starter.datainitializer;
+package com.lantanagroup.pdex.datainitializer;
 
 import java.nio.charset.StandardCharsets;
 

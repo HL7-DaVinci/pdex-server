@@ -53,9 +53,8 @@ spring:
     allow-bean-definition-overriding: true
   flyway:
     enabled: false
-    fail-on-missing-locations: false
-  #  check-location: false
     baselineOnMigrate: true
+    fail-on-missing-locations: false
   datasource:
     url: 'jdbc:h2:file:./target/database/h2'
     #url: jdbc:h2:mem:test_mem
@@ -152,8 +151,6 @@ hapi:
     openapi_enabled: true
     ### This is the FHIR version. Choose between, DSTU2, DSTU3, R4 or R5
     fhir_version: R4
-    # Corey Spears - Allow external reference for consent policy for Member match operation
-    allow_external_references: true
     ### Flag is false by default. This flag enables runtime installation of IG's.
     ig_runtime_upload_enabled: false
     ### This flag when enabled to true, will avail evaluate measure operations from CR Module.
@@ -164,14 +161,18 @@ hapi:
     ### forces the use of the https:// protocol for the returned server address.
     ### alternatively, it may be set using the X-Forwarded-Proto header.
     #   use_apache_address_strategy_https: false
-    ### enables the server to host content like HTML, css, etc. under the url pattern of /static/**
-    ### the deepest folder level will be used. E.g. - if you put file:/foo/bar/bazz as value then the files are resolved under /static/bazz/**
-    #staticLocation: file:/foo/bar/bazz
+    ### enables the server to overwrite defaults on HTML, css, etc. under the url pattern of eg. /content/custom **
+    ### Folder with custom content MUST be named custom. If omitted then default content applies
+    #custom_content_path: ./custom
+    ### enables the server host custom content. If e.g. the value ./configs/app is supplied then the content
+    ### will be served under /web/app
+    #app_content_path: ./configs/app
     ### enable to set the Server URL
     server_address: http://localhost:8080/fhir
     #    defer_indexing_for_codesystems_of_size: 101
-    
-    # install_transitive_ig_dependencies: true
+    ### Flag is true by default. This flag filters resources during package installation, allowing only those resources with a valid status (e.g. active) to be installed.
+    #    validate_resource_status_for_package_upload: false 
+    #    install_transitive_ig_dependencies: true
     implementationguides:
       pdex:
         name: hl7.fhir.us.davinci-pdex
@@ -179,6 +180,17 @@ hapi:
         fetchDependencies: false
         installMode: STORE_ONLY
         reloadExisting: true
+    ###    example from registry (packages.fhir.org)
+    #  swiss:
+    #    name: swiss.mednet.fhir
+    #    version: 0.8.0
+    #    reloadExisting: false
+    #    installMode: STORE_AND_INSTALL
+    #      example not from registry
+    #      ips_1_0_0:
+    #        packageUrl: https://build.fhir.org/ig/HL7/fhir-ips/package.tgz
+    #        name: hl7.fhir.uv.ips
+    #        version: 1.0.0
     #    supported_resource_types:
     #      - Patient
     #      - Observation
@@ -188,7 +200,7 @@ hapi:
     allowed_bundle_types: COLLECTION,DOCUMENT,MESSAGE,TRANSACTION,TRANSACTIONRESPONSE,BATCH,BATCHRESPONSE,HISTORY,SEARCHSET
     #    allow_cascading_deletes: true
     #    allow_contains_searches: true
-    #    allow_external_references: true
+    allow_external_references: true
     #    allow_multiple_delete: true
     #    allow_override_default_search_params: true
     #    auto_create_placeholder_reference_targets: false
@@ -218,7 +230,6 @@ hapi:
     #    enforce_referential_integrity_on_write: false
     #    etag_support_enabled: true
     #    expunge_enabled: true
-    #    client_id_strategy: ALPHANUMERIC
     client_id_strategy: ANY
     #    server_id_strategy: SEQUENTIAL_NUMERIC
     #    fhirpath_interceptor_enabled: false
@@ -254,8 +265,9 @@ hapi:
     search-coord-core-pool-size: 20
     search-coord-max-pool-size: 100
     search-coord-queue-capacity: 200
-    
+
     # Search Prefetch Thresholds.
+
     # This setting sets the number of search results to prefetch. For example, if this list
     # is set to [100, 1000, -1] then the server will initially load 100 results and not
     # attempt to load more. If the user requests subsequent page(s) of results and goes
@@ -264,8 +276,9 @@ hapi:
     # A threshold of -1 means to load all results. Note that if the final threshold is a
     # number other than -1, the system will never prefetch more than the given number.
     search_prefetch_thresholds: 13,503,2003,-1
+
     # comma-separated package names, will be @ComponentScan'ed by Spring to allow for creating custom Spring beans
-    custom-bean-packages: com.lantanagroup.pdex.cdshooks
+    custom-bean-packages: com.lantanagroup.pdex
     
     # comma-separated list of fully qualified interceptor classes. 
     # classes listed here will be fetched from the Spring context when combined with 'custom-bean-packages', 
@@ -276,6 +289,7 @@ hapi:
     # classes listed here will be fetched from the Spring context when combined with 'custom-bean-packages', 
     # or will be instantiated via reflection using an no-arg contructor; then registered with the server  
     #custom-provider-classes:  
+    
     # Threadpool size for BATCH'ed GETs in a bundle.
     #    bundle_batch_pool_size: 10
     #    bundle_batch_pool_max_size: 50

@@ -12,8 +12,6 @@ import ca.uhn.fhir.jpa.subscription.match.config.SubscriptionProcessorConfig;
 import ca.uhn.fhir.jpa.subscription.match.config.WebsocketDispatcherConfig;
 import ca.uhn.fhir.jpa.subscription.submit.config.SubscriptionSubmitterConfig;
 import ca.uhn.fhir.rest.server.RestfulServer;
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.boot.SpringApplication;
@@ -24,19 +22,9 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Import;
 
-import com.lantanagroup.pdex.CapabilityStatementCustomizer;
-import com.lantanagroup.pdex.security.AuthInterceptor;
-import com.lantanagroup.pdex.security.DiscoveryInterceptor;
-import com.lantanagroup.pdex.security.SearchInterceptor;
-import com.lantanagroup.pdex.security.SecurityProperties;
-import com.lantanagroup.pdex.security.SmartDiscoveryInterceptor;
-
-
-@ComponentScan(basePackages = {"ca.uhn.fhir.jpa.starter", "com.lantanagroup.pdex"})
 @ServletComponentScan(basePackageClasses = {RestfulServer.class})
 @SpringBootApplication(exclude = {ElasticsearchRestClientAutoConfiguration.class, ThymeleafAutoConfiguration.class})
 @Import({
@@ -65,35 +53,10 @@ public class Application extends SpringBootServletInitializer {
 	@Autowired
 	AutowireCapableBeanFactory beanFactory;
 
-	@Autowired
-	AppProperties appProperties;
-
-	@Autowired
-	SecurityProperties securityProperties;
-
 	@Bean
 	@Conditional(OnEitherVersion.class)
 	public ServletRegistrationBean hapiServletRegistration(RestfulServer restfulServer) {
-
-		// Register capability statement customizer
-		restfulServer.registerInterceptor(new CapabilityStatementCustomizer(appProperties, securityProperties));
-
-		// Add interceptors for SMART on FHIR and UDAP support
-		restfulServer.registerInterceptor(new SmartDiscoveryInterceptor(appProperties, securityProperties));
-		restfulServer.registerInterceptor(new DiscoveryInterceptor(appProperties, securityProperties));
-		restfulServer.registerInterceptor(new AuthInterceptor(appProperties, securityProperties));
-		restfulServer.registerInterceptor(new SearchInterceptor(appProperties, securityProperties));
-
 		ServletRegistrationBean servletRegistrationBean = new ServletRegistrationBean();
-		/* Removed by Corey Spears, Added registerProvider to StarterJpaConfig instead
-		// Added by Rick Geimer to wire custom operations
-		List<IResourceProvider> resourceProviders = new ArrayList<IResourceProvider>();
-		List<IResourceProvider> old = restfulServer.getResourceProviders();
-		resourceProviders.addAll(old);
-		resourceProviders.add(new MemberMatchProvider());
-		restfulServer.setResourceProviders(resourceProviders);
-		// End Rick stuff
-		 */
 		beanFactory.autowireBean(restfulServer);
 		servletRegistrationBean.setServlet(restfulServer);
 		servletRegistrationBean.addUrlMappings("/fhir/*");
