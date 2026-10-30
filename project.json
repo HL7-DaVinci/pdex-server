@@ -1,15 +1,16 @@
 {
   "name": "pdex-server",
   "$schema": "node_modules/nx/schemas/project-schema.json",
+  "includedScripts": [],
   "projectType": "application",
   "sourceRoot": "src",
+  "packageBase": "com.lantanagroup.pdex",
+  "fhirVersion": "R4",
+  "hapiReleaseVersion": "8.12.0-2",
+  "pluginVersion": "0.3.2",
   "tags": [
     "nx-fhir-server",
     "fhir",
     "server"
-  ],
-  "packageBase": "com.lantanagroup.pdex",
-  "fhirVersion": "R4",
-  "hapiReleaseVersion": "7.6.0",
-  "pluginVersion": "0.3.2"
+  ]
 }

@@ -63,6 +63,12 @@ public class DavinciDataExportCreateReportStep
     return RunOutcome.SUCCESS;
   }
 
+  // The reducer keeps per-job state, so each job gets a new instance.
+  @Override
+  public IReductionStepWorker<DavinciDataExportJobParameters, BulkExportBinaryFileId, BulkExportJobResults> newInstance() {
+    return new DavinciDataExportCreateReportStep();
+  }
+
   @Nonnull
 	@Override
 	public ChunkOutcome consume(

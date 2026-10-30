@@ -16,13 +16,13 @@ import ca.uhn.fhir.batch2.api.IJobStepWorker;
 import ca.uhn.fhir.batch2.api.JobExecutionFailedException;
 import ca.uhn.fhir.batch2.api.RunOutcome;
 import ca.uhn.fhir.batch2.api.StepExecutionDetails;
-import ca.uhn.fhir.batch2.jobs.export.models.ExpandedResourcesList;
+import ca.uhn.fhir.batch2.jobs.export.models.BulkExportBinaryFileId;
 import ca.uhn.fhir.jpa.api.dao.DaoRegistry;
 import ca.uhn.fhir.jpa.api.dao.IFhirResourceDao;
 import ca.uhn.fhir.rest.api.server.SystemRequestDetails;
 import ca.uhn.fhir.rest.api.server.bulk.BulkExportJobParameters.ExportStyle;
 
-public class DavinciDataExportUpdateGroupStep implements IJobStepWorker<DavinciDataExportJobParameters, ExpandedResourcesList, ExpandedResourcesList> {
+public class DavinciDataExportUpdateGroupStep implements IJobStepWorker<DavinciDataExportJobParameters, BulkExportBinaryFileId, BulkExportBinaryFileId> {
 
   private static final String LAST_TRANSMISSION_EXTENSION = "http://hl7.org/fhir/us/davinci-pdex/StructureDefinition/base-ext-last-transmission";
   private static final String LAST_TYPES_EXTENSION = "http://hl7.org/fhir/us/davinci-pdex/StructureDefinition/base-ext-last-types";
@@ -33,8 +33,8 @@ public class DavinciDataExportUpdateGroupStep implements IJobStepWorker<DavinciD
 	private DaoRegistry myDaoRegistry;
 
   @Override
-  public RunOutcome run(StepExecutionDetails<DavinciDataExportJobParameters, ExpandedResourcesList> theStepExecutionDetails,
-      IJobDataSink<ExpandedResourcesList> theDataSink) throws JobExecutionFailedException {
+  public RunOutcome run(StepExecutionDetails<DavinciDataExportJobParameters, BulkExportBinaryFileId> theStepExecutionDetails,
+      IJobDataSink<BulkExportBinaryFileId> theDataSink) throws JobExecutionFailedException {
 
     // If the export style is not GROUP, then we don't need to do anything
     if (theStepExecutionDetails.getParameters().getExportStyle() != ExportStyle.GROUP) {

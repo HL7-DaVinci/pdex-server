@@ -23,7 +23,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ca.uhn.fhir.batch2.api.IJobCoordinator;
-import ca.uhn.fhir.batch2.jobs.export.BulkDataExportProvider;
 import ca.uhn.fhir.batch2.model.JobInstance;
 import ca.uhn.fhir.batch2.model.JobInstanceStartRequest;
 import ca.uhn.fhir.batch2.model.StatusEnum;
@@ -43,6 +42,7 @@ import ca.uhn.fhir.rest.server.exceptions.InvalidRequestException;
 import ca.uhn.fhir.rest.server.exceptions.ResourceNotFoundException;
 import ca.uhn.fhir.rest.server.exceptions.UnprocessableEntityException;
 import ca.uhn.fhir.rest.server.servlet.ServletRequestDetails;
+import ca.uhn.fhir.rest.server.util.ServletRequestUtil;
 import ca.uhn.fhir.util.JsonUtil;
 import ca.uhn.fhir.util.OperationOutcomeUtil;
 import ca.uhn.fhir.util.UrlUtil;
@@ -80,7 +80,7 @@ public class BulkMemberMatchProvider {
       @OperationParam(name = "MemberBundle", min = 0, max = OperationParam.MAX_UNLIMITED) List<ParametersParameterComponent> memberBundles,
       ServletRequestDetails theRequestDetails) {
 
-    BulkDataExportProvider.validatePreferAsyncHeader(theRequestDetails, OPERATION_BULK_MEMBER_MATCH);
+    ServletRequestUtil.validatePreferAsyncHeader(theRequestDetails, OPERATION_BULK_MEMBER_MATCH);
     String specVersion = resolveSpecVersion(theRequestDetails);
     validateMemberBundles(memberBundles);
 

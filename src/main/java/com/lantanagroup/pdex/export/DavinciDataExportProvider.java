@@ -26,16 +26,19 @@ import org.slf4j.LoggerFactory;
 import ca.uhn.fhir.batch2.api.IJobCoordinator;
 import ca.uhn.fhir.batch2.api.JobOperationResultJson;
 import ca.uhn.fhir.batch2.jobs.export.BulkDataExportProvider;
+import ca.uhn.fhir.batch2.jobs.export.BulkExportJobParametersBuilder;
 import ca.uhn.fhir.batch2.model.JobInstance;
 import ca.uhn.fhir.batch2.model.JobInstanceStartRequest;
 import ca.uhn.fhir.batch2.model.StatusEnum;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.i18n.Msg;
+import ca.uhn.fhir.interceptor.model.RequestPartitionId;
 import ca.uhn.fhir.jpa.api.dao.DaoRegistry;
 import ca.uhn.fhir.jpa.api.model.BulkExportJobResults;
 import ca.uhn.fhir.jpa.batch.models.Batch2JobStartResponse;
 import ca.uhn.fhir.jpa.bulk.export.model.BulkExportResponseJson;
 import ca.uhn.fhir.jpa.model.util.JpaConstants;
+import ca.uhn.fhir.jpa.partition.IRequestPartitionHelperSvc;
 import ca.uhn.fhir.rest.annotation.IdParam;
 import ca.uhn.fhir.rest.annotation.Operation;
 import ca.uhn.fhir.rest.annotation.OperationParam;
@@ -45,6 +48,7 @@ import ca.uhn.fhir.rest.api.server.bulk.BulkExportJobParameters.ExportStyle;
 import ca.uhn.fhir.rest.server.exceptions.InternalErrorException;
 import ca.uhn.fhir.rest.server.exceptions.InvalidRequestException;
 import ca.uhn.fhir.rest.server.servlet.ServletRequestDetails;
+import ca.uhn.fhir.rest.server.util.ServletRequestUtil;
 import ca.uhn.fhir.util.ArrayUtil;
 import ca.uhn.fhir.util.DatatypeUtil;
 import ca.uhn.fhir.util.JsonUtil;
@@ -68,12 +72,14 @@ public class DavinciDataExportProvider {
   private DaoRegistry daoRegistry;
   private IJobCoordinator jobCoordinator;
   private BulkDataExportProvider bulkDataExportProvider;
+  private IRequestPartitionHelperSvc requestPartitionHelperSvc;
 
-  public DavinciDataExportProvider(FhirContext ctx, DaoRegistry daoRegistry, IJobCoordinator jobCoordinator, BulkDataExportProvider bulkDataExportProvider) {
+  public DavinciDataExportProvider(FhirContext ctx, DaoRegistry daoRegistry, IJobCoordinator jobCoordinator, BulkDataExportProvider bulkDataExportProvider, IRequestPartitionHelperSvc requestPartitionHelperSvc) {
     this.ctx = ctx;
     this.daoRegistry = daoRegistry;
     this.jobCoordinator = jobCoordinator;
     this.bulkDataExportProvider = bulkDataExportProvider;
+    this.requestPartitionHelperSvc = requestPartitionHelperSvc;
 
   }
 
@@ -90,7 +96,7 @@ public class DavinciDataExportProvider {
       ServletRequestDetails theRequestDetails) {
 
     // require "Prefer: respond-async" request header
-    BulkDataExportProvider.validatePreferAsyncHeader(theRequestDetails, OPERATION_DAVINCI_DATA_EXPORT);
+    ServletRequestUtil.validatePreferAsyncHeader(theRequestDetails, OPERATION_DAVINCI_DATA_EXPORT);
 
     // ensure Group resource exists... throws ResourceNotFoundException if not
     daoRegistry.getResourceDao(Group.class).read(theId, theRequestDetails);
@@ -100,6 +106,12 @@ public class DavinciDataExportProvider {
         theTypeFilter, thePatient, theExportType, theUntil);
 
     jobParameters.setOriginalRequestUrl(theRequestDetails.getCompleteUrl());
+
+    // Since HAPI 8 the export steps read the partition from the job parameters. HAPI's own $export sets it the same way.
+    RequestPartitionId partitionId = requestPartitionHelperSvc.determineReadPartitionForRequestForServerOperation(
+        theRequestDetails, OPERATION_DAVINCI_DATA_EXPORT);
+    requestPartitionHelperSvc.validateHasPartitionPermissions(theRequestDetails, "Binary", partitionId);
+    jobParameters.setPartitionIdForSecurity(partitionId);
 
     // start the job
     startJob(theRequestDetails, jobParameters);
@@ -259,7 +271,7 @@ public class DavinciDataExportProvider {
 
     for (IPrimitiveType<String> next : theTypeFilter) {
       String typeFilterString = next.getValueAsString();
-      Arrays.stream(typeFilterString.split(BulkDataExportProvider.FARM_TO_TABLE_TYPE_FILTER_REGEX))
+      Arrays.stream(typeFilterString.split(BulkExportJobParametersBuilder.FARM_TO_TABLE_TYPE_FILTER_REGEX))
           .filter(StringUtils::isNotBlank)
           .forEach(retVal::add);
     }

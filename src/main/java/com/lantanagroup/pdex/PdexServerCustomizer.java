@@ -8,6 +8,7 @@ import ca.uhn.fhir.batch2.api.IJobCoordinator;
 import ca.uhn.fhir.batch2.jobs.export.BulkDataExportProvider;
 import ca.uhn.fhir.context.FhirContext;
 import ca.uhn.fhir.jpa.api.dao.DaoRegistry;
+import ca.uhn.fhir.jpa.partition.IRequestPartitionHelperSvc;
 import ca.uhn.fhir.jpa.starter.AppProperties;
 import ca.uhn.fhir.rest.server.RestfulServer;
 import ca.uhn.fhir.rest.server.interceptor.CorsInterceptor;
@@ -32,6 +33,7 @@ public class PdexServerCustomizer {
       DaoRegistry daoRegistry,
       IJobCoordinator jobCoordinator,
       BulkDataExportProvider bulkDataExportProvider,
+      IRequestPartitionHelperSvc requestPartitionHelperSvc,
       MemberMatchProvider memberMatchProvider,
       AppProperties appProperties,
       SecurityProperties securityProperties,
@@ -40,7 +42,7 @@ public class PdexServerCustomizer {
     FhirContext ctx = server.getFhirContext();
     server.registerProvider(memberMatchProvider);
     server.registerProvider(new BulkMemberMatchProvider(ctx, daoRegistry, jobCoordinator));
-    server.registerProvider(new DavinciDataExportProvider(ctx, daoRegistry, jobCoordinator, bulkDataExportProvider));
+    server.registerProvider(new DavinciDataExportProvider(ctx, daoRegistry, jobCoordinator, bulkDataExportProvider, requestPartitionHelperSvc));
 
     server.registerInterceptor(new CapabilityStatementCustomizer(appProperties, securityProperties));
     server.registerInterceptor(new SmartDiscoveryInterceptor(appProperties, securityProperties));

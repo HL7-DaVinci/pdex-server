@@ -50,7 +50,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {Application.class}, properties = {
     "spring.datasource.url=jdbc:h2:mem:dbr4-bulk-member-match",
     "hapi.fhir.fhir_version=r4",
-    "hapi.fhir.cr_enabled=false",
+    "hapi.fhir.cr.enabled=false",
+    "hapi.fhir.cdshooks.enabled=false",
+    "hapi.fhir.server_address=",
     "security.enable-auth=false",
     "security.enable-proxy=false",
     "hapi.fhir.custom-bean-packages=com.lantanagroup.pdex"
@@ -111,8 +113,11 @@ class BulkMemberMatchIT {
     String pollUrl = kickoff(request);
     assertTrue(pollUrl.contains("$bulk-member-match-poll-status"));
 
-    // default STU 2.1: completed status returns the Parameters envelope directly
-    Parameters envelope = (Parameters) ctx.newJsonParser().parseResource(pollUntilComplete(pollUrl));
+    // default STU 2.1: the completion manifest references the Parameters envelope Binary
+    JsonNode manifest = objectMapper.readTree(pollUntilComplete(pollUrl));
+    assertEquals("Parameters", manifest.get("output").get(0).get("type").asText());
+    Parameters envelope = (Parameters) ctx.newJsonParser().parseResource(
+        readBinaryContent(manifest.get("output").get(0).get("url").asText()));
 
     Group matched = (Group) envelope.getParameter("MatchedMembers").getResource();
     Group noMatch = (Group) envelope.getParameter("NonMatchedMembers").getResource();
@@ -292,7 +297,7 @@ class BulkMemberMatchIT {
   private String pollUntilComplete(String pollUrl) throws Exception {
     await().atMost(3, TimeUnit.MINUTES).pollInterval(2, TimeUnit.SECONDS).until(() -> {
       try {
-        jobMaintenanceService.runMaintenancePass();
+        jobMaintenanceService.runActiveJobMaintenancePass();
       } catch (Exception e) {
         // maintenance pass may already be running; polling continues regardless
       }
@@ -319,10 +324,14 @@ class BulkMemberMatchIT {
     }
   }
 
-  private List<Group> fetchGroupNdjson(String url) {
+  private String readBinaryContent(String url) {
     Binary binary = client.read().resource(Binary.class)
         .withId(new IdType(url.substring(url.indexOf("/Binary/") + 1)).getIdPart()).execute();
-    String ndjson = new String(binary.getContent(), StandardCharsets.UTF_8);
+    return new String(binary.getContent(), StandardCharsets.UTF_8);
+  }
+
+  private List<Group> fetchGroupNdjson(String url) {
+    String ndjson = readBinaryContent(url);
 
     List<Group> groups = new ArrayList<>();
     for (String line : ndjson.split("\n")) {
