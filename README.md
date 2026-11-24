@@ -18,24 +18,6 @@ cd pdex-server
 mvn -Pjetty spring-boot:run
 ```
 
-## Security
-The server supports requiring an auth token for resource requests if the `security.enable-auth` property is set to `true`. If this is enabled, requests can bypass this requirement by including the value set in `security.bypass-header` in the header of the request. The default value for this header is `X-Allow-Public-Access`.
-
-With security enabled, the configuration values `security.issuer`, `security.authorization-url`, and `security.token-url` should be set at a minimum.  Optionally, the `security.introspection-url` should be set if the confidential client properties of `security.client-id` and `security.client-secret` are not set.
-
-[SMART on FHIR](https://build.fhir.org/ig/HL7/smart-app-launch/) clients can perform a patient standalone launch against this server.  This will require a properly configured identity provider to provide the necessary user autehntication and ultimately an access token as described in the [SMART example app launch](https://build.fhir.org/ig/HL7/smart-app-launch/example-app-launch-public.html).  
-
-The provider must be capable of providing custom properties in the token endpoint such as `patient` to provide the patient context for the launch.
-
-One popular solution for an identity provider is [Keycloak](https://www.keycloak.org/) which can be easily run in Docker using the [getting started guide](https://www.keycloak.org/getting-started/getting-started-docker).  However, to provide custom properties on the token endpoint requires custom code.  One solution for this is the [Keycloak extensions for FHIR project](https://github.com/Alvearie/keycloak-extensions-for-fhir).  However, this project is dependent on an outdated version of Keycloak.  
-
-For convenience, this server provides a configuration option at `security.enable-proxy` that will cause the server to provide a token endpoint.  The response clients will receive during the discovery step of a SMART launch at `/fhir/.well-known/smart-configuration` will show the `token_endpoint` as the server's `/auth/token` endpoint.  Requests to this endpoint will be proxied to the configured `security.token-url` and add the necessary properties to the response based on the claims in the received `access_token`.
-
-Additionally, an exported configuration for Keycloak is provided that will create a realm named `pdex` with common [SMART on FHIR scopes](https://build.fhir.org/ig/HL7/smart-app-launch/scopes-and-launch-context.html) and two clients: a confidential client named `pdex-server` and a public client named `smart-client`.  This can be imported by logging into Keycloak and creating a new realm using the `pdex-keycloak-realm.json` file.
-
-Creating the realm with this file will not create any users.  When creating users in the realm, custom attributes should be set to connect the user to a FHIR resource.  For example, set the `patient` attribute to a corresponding patient FHIR ID.  When combined with setting `security.enable-proxy` to `true`, this will allow the server to provide the correct patient context in the token response when a client requests a patient launch.
-
-
 ### Configuration via environment variables
 
 You can customize HAPI directly from the `run` command using environment variables. For example:

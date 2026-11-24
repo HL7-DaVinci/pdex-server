@@ -53,8 +53,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
     "hapi.fhir.cr.enabled=false",
     "hapi.fhir.cdshooks.enabled=false",
     "hapi.fhir.server_address=",
-    "security.enable-auth=false",
-    "security.enable-proxy=false",
     "hapi.fhir.custom-bean-packages=com.lantanagroup.pdex"
 })
 class BulkMemberMatchIT {

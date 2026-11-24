@@ -33,19 +33,3 @@ hapi:
 
 initial-data:
   - ri_resources
-
-security:
-  enable-auth: false
-  enable-proxy: false
-  bypass-header: X-Allow-Public-Access
-  # client-id:
-  # client-secret:
-  issuer: https://udap-security.fast.hl7.org
-  authorization-url:
-  introspection-url:
-  token-url:
-  patient-claim-required: false
-  udap:
-    security-server-base: https://udap-security.fast.hl7.org
-    cert-file: classpath:cert-local-pdex-server.pfx
-    cert-pass: udap-test
