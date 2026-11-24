@@ -7,6 +7,43 @@
   "fhirVersion": "R4",
   "hapiReleaseVersion": "8.12.0-2",
   "pluginVersion": "0.3.3",
+  "features": {
+    "frontend-proxy": {
+      "version": 1,
+      "options": {
+        "passthrough": true
+      }
+    },
+    "auth-resource": {
+      "version": 1,
+      "options": {
+        "issuer": "https://udap-security.fast.hl7.org"
+      }
+    },
+    "auth-udap": {
+      "version": 1,
+      "options": {}
+    },
+    "auth-scopes": {
+      "version": 1,
+      "options": {}
+    },
+    "auth-smart": {
+      "version": 1,
+      "options": {}
+    },
+    "auth-login": {
+      "version": 1,
+      "options": {
+        "viteHttps": true,
+        "composeHttps": true
+      }
+    },
+    "auth-people": {
+      "version": 1,
+      "options": {}
+    }
+  },
   "tags": [
     "nx-fhir-server",
     "fhir",

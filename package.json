@@ -9,10 +9,13 @@
   },
   "private": true,
   "dependencies": {
-    "nx-fhir": "0.3.3"
+    "nx-fhir": "0.3.4"
   },
   "devDependencies": {
     "@nx/workspace": "23.3.3",
     "nx": "23.3.3"
-  }
+  },
+  "workspaces": [
+    "frontend"
+  ]
 }

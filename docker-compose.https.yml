@@ -1,0 +1,17 @@
+# Usage: docker compose -f docker-compose.https.yml up --build
+# App: https://localhost
+services:
+  server:
+    build:
+      context: .
+  https:
+    image: caddy:2
+    command: caddy reverse-proxy --from localhost --to server:8080
+    ports:
+      - "443:443"
+    volumes:
+      - caddy-data:/data
+    depends_on:
+      - server
+volumes:
+  caddy-data:

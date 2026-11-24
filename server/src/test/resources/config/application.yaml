@@ -1,0 +1,9 @@
+app:
+  auth:
+    enabled: false
+    udap:
+      enabled: false
+    scopes:
+      enabled: false
+    smart:
+      enabled: false

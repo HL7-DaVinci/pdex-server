@@ -1,0 +1,33 @@
+{
+  "name": "frontend",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "frontend/src",
+  "tags": [
+    "nx-fhir-frontend",
+    "fhir",
+    "frontend",
+    "client",
+    "clinical"
+  ],
+  "frontendVersion": "0.3.4",
+  "frontendTemplate": "clinical",
+  "navigationLayout": "topnav",
+  "pluginVersion": "0.3.4",
+  "targets": {
+    "copy-to-server": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "build"
+      ],
+      "options": {
+        "commands": [
+          "rimraf --glob \"../server/src/main/resources/static/*\"",
+          "cpy \"dist/**\" \"../server/src/main/resources/static\" --cwd=."
+        ],
+        "parallel": false,
+        "cwd": "frontend"
+      }
+    }
+  }
+}
