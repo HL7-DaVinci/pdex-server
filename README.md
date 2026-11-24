@@ -14,9 +14,11 @@ This project is based on the [HAPI-FHIR JPA Server Starter Project](https://gith
 A live demo is hosted by [HL7 FHIR Foundry](https://foundry.hl7.org/products/ed7f147c-b531-4e2e-9cc1-8352c16132e3), where you may also download curated configurations to run yourself.
 ```
 git clone https://github.com/HL7-DaVinci/pdex-server/
-cd pdex-server
+cd pdex-server/server
 mvn -Pjetty spring-boot:run
 ```
+
+The server project is in the `server` directory. Run the Maven commands and use the file paths of this document from that directory.
 
 ### Configuration via environment variables
 
@@ -258,7 +260,7 @@ Server will then be accessible at http://localhost:8080/ and eg. http://localhos
 
 ### Using the Dockerfile and multistage build
 ```bash
-./build-docker-image.sh && docker run -p 8080:8080 hapi-fhir/hapi-fhir-jpaserver-starter:latest
+docker build -t hapi-fhir/hapi-fhir-jpaserver-starter . && docker run -p 8080:8080 hapi-fhir/hapi-fhir-jpaserver-starter:latest
 ```
 Server will then be accessible at http://localhost:8080/ and eg. http://localhost:8080/fhir/metadata. Remember to adjust your overlay configuration in the application.yaml to the following:
 

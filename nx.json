@@ -1,7 +1,17 @@
 {
   "$schema": "./node_modules/nx/schemas/nx-schema.json",
+  "analytics": false,
+  "namedInputs": {
+    "default": [
+      "{projectRoot}/**/*",
+      "sharedGlobals"
+    ],
+    "production": [
+      "default"
+    ],
+    "sharedGlobals": []
+  },
   "plugins": [
     "nx-fhir"
-  ],
-  "analytics": false
+  ]
 }
